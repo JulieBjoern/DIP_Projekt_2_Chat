@@ -2,11 +2,29 @@
 [
   {
     "id": 1,
-    "name": "ChatTest",
+    "name": "Gruppechat Projekt",
     "ownerId": 1,
     "createdAt": "2026-01-01T00:00:00.000Z",
     "messages": [
       { "id": 1, "text": "Hej allesammen!", "ownerId": 1, "chatId": 1, "createdAt": "2026-01-01T00:00:00.000Z" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Gruppechat Aktivitet",
+    "ownerId": 1,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "messages": [
+      { "id": 1, "text": "Hej igen!", "ownerId": 1, "chatId": 2, "createdAt": "2026-01-01T00:00:00.000Z" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Gruppechat Turnering",
+    "ownerId": 1,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "messages": [
+      { "id": 1, "text": "Hej endnu en gang!", "ownerId": 1, "chatId": 3, "createdAt": "2026-01-01T00:00:00.000Z" }
     ]
   }
 ]
