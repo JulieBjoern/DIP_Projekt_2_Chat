@@ -4,11 +4,18 @@ html
 
         link(rel="stylesheet", href="/css/styles.css")
     body
-        p Du er nu logget ind
-        p her burde du kunne: 
-            a logge ud
-        table 
-            p Her er en liste over chats: 
+        div 
+            p.loggedInAs Du er nu logget ind som ...
+            p Her er en liste over chats:   
+            table 
+                if chats && chats.length
+                    each chat in chats
+                        tr 
+                            td
+                                a(href='#', class='chat-link',data-id=chat.id)= chat.name
+                else
+                    tr
+                        td Der er ikke oprettet nogle chats
             
             button 
                 strong opret 
@@ -16,5 +23,7 @@ html
             button  
                 strong opret 
                     | bruger
+            button.logout
+                strong log ud
 
 
