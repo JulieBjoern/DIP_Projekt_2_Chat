@@ -1,5 +1,7 @@
 import express from 'express'
 import session from 'express-session'
+import userRouter from './routes/users.js'
+
 
 const app = express()
 
@@ -20,9 +22,16 @@ app.use(session({
     resave: true
 }))
 
+//ROUTES 
+app.use('/users', userRouter)
+
 app.get('/', (request, response)=>{
-response.render('frontpage')
-    
+    const isItAValidUser = request.session.isItAValidUser
+    if (!isItAValidUser) {
+        response.redirect('/users/login')
+    } else {
+        response.render('frontpage', {isItAValidUser})
+    }
 })
 
 // middleware der fanger resterende requests
