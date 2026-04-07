@@ -1,0 +1,26 @@
+{
+  "name": "dip_projekt_2_chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulieBjoern/DIP_Projekt_2_Chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/JulieBjoern/DIP_Projekt_2_Chat/issues"
+  },
+  "homepage": "https://github.com/JulieBjoern/DIP_Projekt_2_Chat#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "pug": "^3.0.4"
+  }
+}
