@@ -14,6 +14,16 @@ app.use(express.static('assets'))
 app.use(express.urlencoded())
 // for at kunne modtage JSON i body skal express kunne læse dette
 app.use(express.json())
+app.use(session({
+    secret: 'secret@agent',
+    saveUninitialized: true,
+    resave: true
+}))
+
+app.get('/', (request, response)=>{
+response.render('frontpage')
+    
+})
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
