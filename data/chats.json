@@ -1,0 +1,12 @@
+
+[
+  {
+    "id": 1,
+    "name": "ChatTest",
+    "ownerId": 1,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "messages": [
+      { "id": 1, "text": "Hej allesammen!", "ownerId": 1, "chatId": 1, "createdAt": "2026-01-01T00:00:00.000Z" }
+    ]
+  }
+]
