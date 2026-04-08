@@ -11,6 +11,13 @@
         "ownerId": 1,
         "chatId": 1,
         "createdAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "text": "Test besked",
+        "ownerId": 0,
+        "chatId": 1,
+        "createdAt": "2026-04-08T10:06:02.516Z"
       }
     ]
   },

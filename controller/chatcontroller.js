@@ -91,11 +91,11 @@ class ChatController {
     // message crud:
 
     // metode til at oprette en besked i en chat
-    static async createMessage(chatId, content, senderId) {
+    static async createMessage(chatId, text, ownerId) {
         const chat = ChatController.getChatById(chatId);
         if (!chat) return null;
 
-        const newMessage = new Message(content, senderId);
+        const newMessage = new Message(text, ownerId, chatId);
         chat.messages.push(newMessage);
         await ChatController.saveChats();
         return newMessage;
@@ -115,11 +115,11 @@ class ChatController {
     }
 
     // metode til at opdatere en besked i en chat
-    static async updateMessage(chatId, messageId, content, senderId) {
+    static async updateMessage(chatId, messageId, text, ownerId) {
         const message = ChatController.getMessageById(chatId, messageId);
         if (!message) return null;
-        message.content = content;
-        message.senderId = senderId;
+        message.text = text;
+        message.ownerId = ownerId;
         await ChatController.saveChats();
         return message;
     }
@@ -129,15 +129,19 @@ class ChatController {
     static async deleteMessage(chatId, messageId) {
         const chat = ChatController.getChatById(chatId);
         if (!chat) return null;
-        chat.messages = chat.messages.filter(m => m.id !== messageId); // .filter i stedet for to for-løkker. .filter er en indbygget array metode der returnerer et nyt array baseret på en betingelse. Her siger vi "returner alle beskeder hvor id ikke er lig med messageId", altså slet den besked der har det id
+        const messageToDelete = chat.messages.find((message) => message.id === messageId);
+        if (!messageToDelete) return null;
+
+        chat.messages = chat.messages.filter(m => m.id !== messageId);
         await ChatController.saveChats();
+        return messageToDelete;
     }
 
     // metode til at hente alle beskeder fra en specifik bruger på tværs af alle chats
     static getMessagesBySenderId(senderId) {
         const messages = [];
         ChatController.chats.forEach(chat => {
-            const userMessages = (chat.messages || []).filter(message => message.senderId === senderId);
+            const userMessages = (chat.messages || []).filter(message => message.ownerId === senderId);
             messages.push(...userMessages);
         });
         return messages; 
