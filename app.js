@@ -2,13 +2,16 @@ import express from 'express'
 import session from 'express-session'
 import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
+import UserController from './controller/usercontroller.js'
+import Chat from './model/chat.js'
 
-// start serveren op og indlæs eksisterende data
-ChatController.startUp()
+// luk ikke serveren før data er indlæst
+async function startServer() {
+    await ChatController.startUp()
+    await UserController.startUp()  
 
 
 const app = express()
-
 
 // SETUP
 app.set('view engine', 'pug')
@@ -50,4 +53,8 @@ app.use((request, response, next)=>{
 
 app.listen(8000, ()=>{
     console.log("🚅 nu kører toget")
-})
+}) 
+
+}
+
+startServer()

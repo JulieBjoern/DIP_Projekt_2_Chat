@@ -26,7 +26,7 @@ response.render('createUser')
 
 userRouter.post('/adduser', async (request, response)=>{
         const {username, password} = request.body
-        UserController.addUser(username, password)
+        await UserController.addUser(username, password)
         response.redirect('/')
 })
 
