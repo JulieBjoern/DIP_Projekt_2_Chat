@@ -4,6 +4,7 @@ import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
 import UserController from './controller/usercontroller.js'
 import Chat from './model/chat.js'
+import chatRouter from './routes/chats.js'
 
 // luk ikke serveren før data er indlæst
 async function startServer() {
@@ -16,8 +17,11 @@ const app = express()
 // SETUP
 app.set('view engine', 'pug')
 
+
 // MIDDLEWARE
 app.use(express.static('assets'))
+
+
 // normal POST formulardata gjort tilgængelig
 // for at kunne modtage alm data i body skal express kunne læse dette
 app.use(express.urlencoded())
@@ -36,7 +40,7 @@ app.use('/users', userRouter)
 
 
 // chat router 
-
+app.use('/chats', chatRouter)
 
 app.get('/', (request, response)=>{
     const isItAValidUser = request.session.isItAValidUser
