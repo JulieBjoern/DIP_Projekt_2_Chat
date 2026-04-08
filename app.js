@@ -1,6 +1,10 @@
 import express from 'express'
 import session from 'express-session'
 import userRouter from './routes/users.js'
+import ChatController from './controller/chatcontroller.js'
+
+// start serveren op og indlæs eksisterende data
+ChatController.startUp()
 
 
 const app = express()
@@ -23,18 +27,19 @@ app.use(session({
 }))
 
 //ROUTES 
+
+// user router til login/logout og user relaterede ting
 app.use('/users', userRouter)
 
 
+// chat router 
+
+
 app.get('/', (request, response)=>{
-  /*  const isItAValidUser = request.session.isItAValidUser
-    if (!isItAValidUser) {
-        response.redirect('/users/login')
-    } else {
-        */
-        response.render('frontpage')
-  //  }
-})
+    const isItAValidUser = request.session.isItAValidUser
+        response.render('frontpage', {isItAValidUser, chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
+    }
+)
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
