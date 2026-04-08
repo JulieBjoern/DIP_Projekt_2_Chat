@@ -49,7 +49,7 @@ app.get('/', (request, response)=>{
 
 app.use('/users', userRouter)
 
-// specifik chat side
+// specifik chat side  TODO: (!!!!!!!kan også lægges ind i chats.js routen!!!!!!)
 app.get('/chat/:id/messages', (request, response) => {
     const id = Number(request.params.id)
     const chat = ChatController.getChatById(id)
@@ -73,4 +73,4 @@ app.listen(8000, ()=>{
 
 }
 
-startServer()
+startServer() 

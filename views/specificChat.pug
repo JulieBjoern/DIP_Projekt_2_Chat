@@ -5,22 +5,22 @@ html
         link(rel="stylesheet", href="/css/styles.css")
         script(src="/js/client.js", defer)
     body
-        main.chat-room
-            header.chat-room__header
+        main
+            header
                 h1= chat.name
                 a(href="/") Tilbage til forsiden
 
-            section#message-list.chat-room__messages
+            div#message-list
                 if messages && messages.length > 0
                     each message in messages
                         article.message(data-message-id=message.id)
-                            p.message__text= message.text
-                            p.message__meta Oprettet #{message.createdAt}
-                            button.delete-message(type="button", data-message-id=message.id) Slet
+                            p= message.text
+                            p Oprettet #{message.createdAt}
+                            button(type="button", data-message-id=message.id) Slet
                 else
                     p Der er ingen beskeder endnu.
 
-            footer.chat-room__composer
+            div
                 form#message-form(data-chat-id=chat.id)
-                    input#message-input(type="text", placeholder="Skriv en besked...", autocomplete="off", required)
+                    input#message-input(type="text", placeholder="Skriv en besked🤔...", required) 
                     button(type="submit") Send

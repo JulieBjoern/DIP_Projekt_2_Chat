@@ -10,7 +10,6 @@ class ChatController {
 
     static async startUp() {
         const data = await Archive.readFile(chats_File);
-        console.log('Data indlæst fra chats.json:', data); // log for at se hvad der kommer ind fra filen
 
         if (!data) { // hvis filen ikke eksisterer eller er tom, initialiserer vi en tom liste og starter id'er på 1
             ChatController.chats = [];
@@ -132,7 +131,7 @@ class ChatController {
         const messageToDelete = chat.messages.find((message) => message.id === messageId);
         if (!messageToDelete) return null;
 
-        chat.messages = chat.messages.filter(m => m.id !== messageId);
+        chat.messages = chat.messages.filter(m => m.id !== messageId); // .filter bruges her til at lave en ny array uden den besked vi vil slette, og så overskriver vi den gamle array med den nye
         await ChatController.saveChats();
         return messageToDelete;
     }
@@ -142,7 +141,7 @@ class ChatController {
         const messages = [];
         ChatController.chats.forEach(chat => {
             const userMessages = (chat.messages || []).filter(message => message.ownerId === senderId);
-            messages.push(...userMessages);
+            messages.push(...userMessages); // her bruger vi spread operatoren (...) til at tilføje alle beskeder fra userMessages ind i vores messages array. Hvis vi bare brugte messages.push(userMessages), ville vi få et array af arrays, fordi userMessages selv er en array. Ved at bruge spread operatoren, "spreader" vi indholdet af userMessages ud i messages arrayet, så det bliver en flad liste af beskeder i stedet for en liste af lister.
         });
         return messages; 
     }

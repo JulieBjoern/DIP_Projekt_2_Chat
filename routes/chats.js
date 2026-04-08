@@ -19,17 +19,13 @@ chatRouter.post('/:id/messages', async (request, response) => {
     const { text } = request.body
     const ownerId = request.session.userId || 0
 
-    if (!text || !text.trim()) {
-        return response.status(400).json({ message: 'Besked mangler' })
-    }
-
     const message = await ChatController.createMessage(chatId, text.trim(), ownerId)
 
     if (!message) {
         return response.status(404).json({ message: 'Chat ikke fundet' })
     }
 
-    response.status(201).json(message)
+    response.status(201).json(message) // 201 = Created, alt er gået godt og der er oprettet en ressource (besked)
 })
 
 chatRouter.delete('/:id/messages/:messageId', async (request, response) => {

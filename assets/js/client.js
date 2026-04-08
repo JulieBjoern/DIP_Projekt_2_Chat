@@ -7,17 +7,15 @@ const messageList = document.querySelector('#message-list');
 const messageInput = document.querySelector('#message-input');
 
 function createMessageElement(message) {
-	const article = document.createElement('article');
-	article.className = 'message';
-	article.dataset.messageId = message.id;
+	const messageElement = document.createElement('article');
+	messageElement.className = 'message';
+	messageElement.dataset.messageId = message.id;
 
 	const textParagraph = document.createElement('p');
-	textParagraph.className = 'message__text';
 	textParagraph.textContent = message.text;
 
-	const metaParagraph = document.createElement('p');
-	metaParagraph.className = 'message__meta';
-	metaParagraph.textContent = `Oprettet ${message.createdAt}`;
+	const createdAtParagraph = document.createElement('p');
+	createdAtParagraph.textContent = `Oprettet ${message.createdAt}`;
 
 	const deleteButton = document.createElement('button');
 	deleteButton.type = 'button';
@@ -25,18 +23,20 @@ function createMessageElement(message) {
 	deleteButton.dataset.messageId = message.id;
 	deleteButton.textContent = 'Slet';
 
-	article.appendChild(textParagraph);
-	article.appendChild(metaParagraph);
-	article.appendChild(deleteButton);
+	messageElement.appendChild(textParagraph);
+	messageElement.appendChild(createdAtParagraph);
+	messageElement.appendChild(deleteButton);
 
-	return article;
+	return messageElement;
 }
 
+
+// nedenstående kode sørger for at håndtere både oprettelse og sletning af beskeder i en chat. Den lytter efter submit events på formularen, og click events på sletteknapperne, og sender de relevante data til serveren via fetch API'et. Når en besked oprettes eller slettes, opdateres DOM'en for at reflektere ændringen uden at skulle genindlæse siden.
 if (messageForm && messageList && messageInput) {
 	const chatId = messageForm.dataset.chatId;
 
 	messageForm.addEventListener('submit', async (event) => {
-		event.preventDefault();
+		event.preventDefault(); // forhindrer at siden genindlæses når formularen submittes
 
 		const text = messageInput.value.trim();
 		if (!text) {
@@ -52,19 +52,20 @@ if (messageForm && messageList && messageInput) {
 		});
 
 		if (!response.ok) {
-			console.error('Kunne ikke oprette besked');
+			console.error('Kunne ikke oprette besked'); // error besked i browser consollen (F12)
 			return;
 		}
 
 		const message = await response.json();
 		const messageElement = createMessageElement(message);
 		messageList.appendChild(messageElement);
-		messageInput.value = '';
-		messageInput.focus();
+		messageInput.value = ''; // rydder input feltet efter at beskeden er sendt 🎉
+		messageInput.focus(); // LILLE DETALJE; KAN DROPPES. sætter fokus tilbage på input feltet, så brugeren kan skrive en ny besked med det samme uden at skulle klikke i feltet igen
 	});
 
-	messageList.addEventListener('click', async (event) => {
-		const deleteButton = event.target.closest('.delete-message');
+	// Vi lytter på messageList i stedet for hver enkelt knap, fordi nye beskeder (og knapper) bliver tilføjet dynamisk.
+	messageList.addEventListener('click', async (event) => { //messageList er statisk, derfor kan vi tilføje event listener på det, og så tjekke om det er en slet knap der er blevet klikket på, selvom knappen ikke var der da siden blev indlæst
+		const deleteButton = event.target.closest('.delete-message'); // event.target.closest() = det vi lige har klikket på, er det en slet knap? 
 		if (!deleteButton) {
 			return;
 		}
@@ -82,7 +83,7 @@ if (messageForm && messageList && messageInput) {
 
 		const messageElement = deleteButton.closest('.message');
 		if (messageElement) {
-			messageElement.remove();
+			messageElement.remove(); // fjerner besked elementet fra DOM'en
 		}
 	});
 }
