@@ -21,8 +21,7 @@ userRouter.post('/login', (request, response)=>{
     } else {
         response.render('noAccess', {})
     }
-});
-
+})
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
 });
@@ -31,8 +30,6 @@ userRouter.post('/adduser', async (request, response)=>{
         const {username, password} = request.body
         UserController.addUser(username, password)
         response.redirect('/')
-
-        
 })
 
 export default userRouter
