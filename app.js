@@ -41,8 +41,8 @@ app.get('/', (request, response)=>{
     }
 )
 response.render('frontpage')
-    
-})
+
+
 app.use('/users', userRouter)
 
 // middleware der fanger resterende requests

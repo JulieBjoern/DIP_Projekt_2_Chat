@@ -21,6 +21,8 @@ userRouter.post('/login', (request, response)=>{
     } else {
         response.render('noAccess', {})
     }
+});
+
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
 });
