@@ -1,5 +1,7 @@
 import express from 'express'
 import session from 'express-session'
+import userRouter from './routes/users.js'
+
 
 const app = express()
 
@@ -24,6 +26,7 @@ app.get('/', (request, response)=>{
 response.render('frontpage')
     
 })
+app.use('/users', userRouter)
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
