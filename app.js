@@ -40,6 +40,10 @@ app.get('/', (request, response)=>{
         response.render('frontpage', {isItAValidUser, chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
+response.render('frontpage')
+    
+})
+app.use('/users', userRouter)
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
