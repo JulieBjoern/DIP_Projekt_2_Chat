@@ -12,7 +12,8 @@ html
                     each chat in chats
                         tr 
                             td
-                                a(href='#', class='chat-link',data-id=chat.id)= chat.name
+                                a(href=`/chat/${chat.id}/messages`, class='chat-link', data-id=chat.id)= chat.name
+
                 else
                     tr
                         td Der er ikke oprettet nogle chats
