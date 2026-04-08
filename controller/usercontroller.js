@@ -6,11 +6,11 @@ class UserController {
 
     static addUser(username, password, numberOfCats){
         UserController.users.push(new User(username, password, numberOfCats))
-        Archive.writeFile('../data/users.json', JSON.stringify(UserController.users))
+        Archive.writeFile('data/users.json', JSON.stringify(UserController.users))
     }
 
     static async startUp(){
-        let data = await Archive.readFile('../data/users.json')
+        let data = await Archive.readFile('data/users.json')
         if (data){
             UserController.users = JSON.parse(data)
             const biggestID = UserController.users.reduce((accumulator, user) => {
