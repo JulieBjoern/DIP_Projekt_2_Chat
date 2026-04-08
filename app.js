@@ -25,13 +25,15 @@ app.use(session({
 //ROUTES 
 app.use('/users', userRouter)
 
+
 app.get('/', (request, response)=>{
-    const isItAValidUser = request.session.isItAValidUser
+  /*  const isItAValidUser = request.session.isItAValidUser
     if (!isItAValidUser) {
         response.redirect('/users/login')
     } else {
-        response.render('frontpage', {isItAValidUser})
-    }
+        */
+        response.render('frontpage')
+  //  }
 })
 
 // middleware der fanger resterende requests
