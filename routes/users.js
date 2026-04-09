@@ -23,6 +23,7 @@ userRouter.post('/adduser', async (request, response)=>{
         await UserController.addUser(username, password, level)
         const userLevel = parseInt(level);
         if (userLevel >= 1 && userLevel <= 3) {
+    request.session.userName = username;
         request.session.userLevel = userLevel;
 
       request.session.save(() => {

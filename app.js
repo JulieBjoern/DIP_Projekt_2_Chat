@@ -61,6 +61,7 @@ app.post('/login', async (request, response) => {
     const user = await UserController.getUser(username, password);
 
     if (user) {
+        request.session.userName = user.username;
         request.session.userLevel = parseInt(user.level);
 
             console.log("Logget ind! Level:", request.session.userLevel);
@@ -70,7 +71,10 @@ app.post('/login', async (request, response) => {
 });
 
 app.get('/', (request, response)=>{
-        response.render('frontpage', { chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
+        response.render('frontpage', {
+            chats: ChatController.getAllChats(),
+            userName: request.session.userName || 'du er ikke logget ind'
+        }) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
 
