@@ -49,21 +49,25 @@ const requiredLevel = (minLevel) => {
 //ROUTES 
 
 // user router til login/logout og user relaterede ting
-app.use('/users', userRouter)
+
 
 
 // chat router 
 app.use('/chats', chatRouter)
 
-app.post('/login', (request, response) => {
-    const userLevel = parseInt(request.body.level);
+app.post('/login', async (request, response) => {
+    const { username, password } = request.body;
     
-    if (userLevel >= 1 && userLevel <= 3) {
-        request.session.userLevel = userLevel;
-        response.redirect('/');
+    const user = await UserController.getUser(username, password);
+
+    if (user) {
+        request.session.userLevel = parseInt(user.level);
+
+            console.log("Logget ind! Level:", request.session.userLevel);
+            response.redirect('/');
+        
     }
 });
-
 
 app.get('/', (request, response)=>{
         response.render('frontpage', { chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
@@ -74,6 +78,9 @@ app.get('/', (request, response)=>{
 app.use('/users', userRouter)
 
 
+
+// liste af users messages
+app.use('/users', userRouter)
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
