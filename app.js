@@ -1,4 +1,4 @@
-import express, { request } from 'express'
+import express, { request, response } from 'express'
 import session from 'express-session'
 import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
@@ -47,11 +47,16 @@ app.get('/', (request, response)=>{
 app.use('/users', userRouter)
 
 // specifik chat router
-app.get('/chats/:id/messages',(request, response)=>{
+app.get('/chat/:id/messages',(request, response)=>{
 const id = parseInt(request.params.id)
 const messages = ChatController.getMessagesByChatId(id)
     response.render('specificChat', {id, messages} )
 
+})
+
+// liste af users router
+app.get('/users', (request, response)=>{
+    response.render('userList', {users: UserController.getAllUsers()})
 })
 
 // middleware der fanger resterende requests
