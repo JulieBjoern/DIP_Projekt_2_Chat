@@ -3,7 +3,7 @@ import session from 'express-session'
 import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
 import UserController from './controller/usercontroller.js'
-import Chat from './model/chat.js'
+import chatRouter from './routes/chats.js'
 
 // luk ikke serveren før data er indlæst
 async function startServer() {
@@ -16,8 +16,11 @@ const app = express()
 // SETUP
 app.set('view engine', 'pug')
 
+
 // MIDDLEWARE
 app.use(express.static('assets'))
+
+
 // normal POST formulardata gjort tilgængelig
 // for at kunne modtage alm data i body skal express kunne læse dette
 app.use(express.urlencoded())
@@ -48,6 +51,7 @@ app.use('/users', userRouter)
 
 
 // chat router 
+app.use('/chats', chatRouter)
 
 app.post('/login', (request, response) => {
     const userLevel = parseInt(request.body.level);
@@ -67,6 +71,24 @@ app.get('/', (request, response)=>{
 
 app.use('/users', userRouter)
 
+// specifik chat side  TODO: (!!!!!!!kan også lægges ind i chats.js routen!!!!!!)
+app.get('/chat/:id/messages', (request, response) => {
+    const id = Number(request.params.id)
+    const chat = ChatController.getChatById(id)
+
+    if (!chat) {
+        return response.status(404).send('404 - Du tabte')
+    }
+
+    const messages = ChatController.getMessagesByChatId(id) || []
+    response.render('specificChat', { chat, messages })
+})
+
+// liste af users router
+app.get('/users', (request, response)=>{
+    response.render('userList', {users: UserController.getAllUsers()})
+})
+
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
     response.status(404).send('404 - Du tabte')
@@ -78,4 +100,4 @@ app.listen(8000, ()=>{
 
 }
 
-startServer()
+startServer() 

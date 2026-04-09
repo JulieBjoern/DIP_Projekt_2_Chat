@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -6,7 +5,20 @@
     "ownerId": 1,
     "createdAt": "2026-01-01T00:00:00.000Z",
     "messages": [
-      { "id": 1, "text": "Hej allesammen!", "ownerId": 1, "chatId": 1, "createdAt": "2026-01-01T00:00:00.000Z" }
+      {
+        "id": 1,
+        "text": "Hej allesammen!",
+        "ownerId": 1,
+        "chatId": 1,
+        "createdAt": "2026-01-01T00:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "text": "Test besked",
+        "ownerId": 0,
+        "chatId": 1,
+        "createdAt": "2026-04-08T10:06:02.516Z"
+      }
     ]
   },
   {
@@ -15,7 +27,13 @@
     "ownerId": 1,
     "createdAt": "2026-01-01T00:00:00.000Z",
     "messages": [
-      { "id": 1, "text": "Hej igen!", "ownerId": 1, "chatId": 2, "createdAt": "2026-01-01T00:00:00.000Z" }
+      {
+        "id": 1,
+        "text": "Hej igen!",
+        "ownerId": 1,
+        "chatId": 2,
+        "createdAt": "2026-01-01T00:00:00.000Z"
+      }
     ]
   },
   {
@@ -24,7 +42,20 @@
     "ownerId": 1,
     "createdAt": "2026-01-01T00:00:00.000Z",
     "messages": [
-      { "id": 1, "text": "Hej endnu en gang!", "ownerId": 1, "chatId": 3, "createdAt": "2026-01-01T00:00:00.000Z" }
+      {
+        "id": 1,
+        "text": "Hej endnu en gang!",
+        "ownerId": 1,
+        "chatId": 3,
+        "createdAt": "2026-01-01T00:00:00.000Z"
+      }
     ]
+  },
+  {
+    "id": 4,
+    "name": "OpretChatTest",
+    "ownerId": 0,
+    "createdAt": "2026-04-08T09:14:47.661Z",
+    "messages": []
   }
 ]

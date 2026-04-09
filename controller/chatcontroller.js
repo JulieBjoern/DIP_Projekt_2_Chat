@@ -10,7 +10,6 @@ class ChatController {
 
     static async startUp() {
         const data = await Archive.readFile(chats_File);
-        console.log('Data indlæst fra chats.json:', data); // log for at se hvad der kommer ind fra filen
 
         if (!data) { // hvis filen ikke eksisterer eller er tom, initialiserer vi en tom liste og starter id'er på 1
             ChatController.chats = [];
@@ -91,11 +90,11 @@ class ChatController {
     // message crud:
 
     // metode til at oprette en besked i en chat
-    static async createMessage(chatId, content, senderId) {
+    static async createMessage(chatId, text, ownerId) {
         const chat = ChatController.getChatById(chatId);
         if (!chat) return null;
 
-        const newMessage = new Message(content, senderId);
+        const newMessage = new Message(text, ownerId, chatId);
         chat.messages.push(newMessage);
         await ChatController.saveChats();
         return newMessage;
@@ -115,11 +114,11 @@ class ChatController {
     }
 
     // metode til at opdatere en besked i en chat
-    static async updateMessage(chatId, messageId, content, senderId) {
+    static async updateMessage(chatId, messageId, text, ownerId) {
         const message = ChatController.getMessageById(chatId, messageId);
         if (!message) return null;
-        message.content = content;
-        message.senderId = senderId;
+        message.text = text;
+        message.ownerId = ownerId;
         await ChatController.saveChats();
         return message;
     }
@@ -129,16 +128,20 @@ class ChatController {
     static async deleteMessage(chatId, messageId) {
         const chat = ChatController.getChatById(chatId);
         if (!chat) return null;
-        chat.messages = chat.messages.filter(m => m.id !== messageId); // .filter i stedet for to for-løkker. .filter er en indbygget array metode der returnerer et nyt array baseret på en betingelse. Her siger vi "returner alle beskeder hvor id ikke er lig med messageId", altså slet den besked der har det id
+        const messageToDelete = chat.messages.find((message) => message.id === messageId);
+        if (!messageToDelete) return null;
+
+        chat.messages = chat.messages.filter(m => m.id !== messageId); // .filter bruges her til at lave en ny array uden den besked vi vil slette, og så overskriver vi den gamle array med den nye
         await ChatController.saveChats();
+        return messageToDelete;
     }
 
     // metode til at hente alle beskeder fra en specifik bruger på tværs af alle chats
     static getMessagesBySenderId(senderId) {
         const messages = [];
         ChatController.chats.forEach(chat => {
-            const userMessages = (chat.messages || []).filter(message => message.senderId === senderId);
-            messages.push(...userMessages);
+            const userMessages = (chat.messages || []).filter(message => message.ownerId === senderId);
+            messages.push(...userMessages); // her bruger vi spread operatoren (...) til at tilføje alle beskeder fra userMessages ind i vores messages array. Hvis vi bare brugte messages.push(userMessages), ville vi få et array af arrays, fordi userMessages selv er en array. Ved at bruge spread operatoren, "spreader" vi indholdet af userMessages ud i messages arrayet, så det bliver en flad liste af beskeder i stedet for en liste af lister.
         });
         return messages; 
     }
