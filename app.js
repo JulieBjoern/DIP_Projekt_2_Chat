@@ -62,6 +62,11 @@ app.get('/chat/:id/messages', (request, response) => {
     response.render('specificChat', { chat, messages })
 })
 
+// liste af users router
+app.get('/users', (request, response)=>{
+    response.render('userList', {users: UserController.getAllUsers()})
+})
+
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
     response.status(404).send('404 - Du tabte')

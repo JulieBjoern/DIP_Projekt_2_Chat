@@ -19,6 +19,11 @@ class UserController {
             User.id = biggestID + 1
         }
     }
+
+     // metode til at hente alle users
+    static getAllUsers() {
+        return UserController.users;
+    }
 }
 
 export default UserController
