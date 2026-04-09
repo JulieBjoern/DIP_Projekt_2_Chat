@@ -2,7 +2,7 @@
 class User {
     static id = 1;
 
-    constructor(username, password, level = 1) {
+    constructor(username, password, level) {
         this.id = User.id++;
         this.username = username;
         this.password = password;
