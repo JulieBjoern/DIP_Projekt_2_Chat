@@ -9,13 +9,13 @@ block content
         div#message-list
             if messages && messages.length > 0
                 each message in messages
-                    article.message
+                    article.message(data-message-id=message.id)
                         p= message.text
                         p Oprettet #{message.createdAt}
-                        button(type="button") Slet
+                        button.delete-message(type="button", data-message-id=message.id) Slet
             else
                 p Der er ingen beskeder endnu.
 
         form#message-form(data-chat-id=chat.id)
-            input(type="text", placeholder="Skriv en besked🤔...", required) 
+            input#message-input(type="text", placeholder="Skriv en besked🤔...", required) 
             button(type="submit") Send
