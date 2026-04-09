@@ -10,7 +10,7 @@ block content
                 each chat in chats
                     tr 
                         td
-                            a(href=`/chat/${chat.id}/messages`, class='chat-link')= chat.name
+                            a(href=`/chats/chat/${chat.id}/messages`, class='chat-link')= chat.name
             else
                 tr
                     td Der er ikke oprettet nogle chats
@@ -20,6 +20,9 @@ block content
 
         a(href="/users/adduser")
             button(type="button") Opret bruger
+
+        a(href="/users")
+            button(type="button") Se liste over brugere
 
         button.logout(type="button") Log ud
 
