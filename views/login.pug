@@ -3,7 +3,8 @@ html
         title Velkommen 
     body
         h1 Her kan du logge ind
-        form(action="/users/login", method="post")
+        form(action="/login", method="post")
                 input(type="text", name="username", placeholder="brugernavn")
                 input(type="password", name="password", placeholder="kodeord")
+                input(type="text", name="level", placeholder="level")
                 button(type="submit") Login   

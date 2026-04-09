@@ -34,6 +34,7 @@ app.use(session({
 
 const requiredLevel = (minLevel) => {
     return (request, response, next) => {
+
         if (request.session.userLevel >= minLevel) {
             return next();
         }
@@ -64,8 +65,7 @@ app.post('/login', (request, response) => {
 
 
 app.get('/', (request, response)=>{
-    const isItAValidUser = request.session.isItAValidUser
-        response.render('frontpage', {isItAValidUser, chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
+        response.render('frontpage', { chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
 
