@@ -37,7 +37,7 @@ const requiredLevel = (minLevel) => {
         if (request.session.userLevel >= minLevel) {
             return next();
         }
-        if (!requeast.session.userLevel) {
+        if (!request.session.userLevel) {
             return response.render('login')
         }
         response.render('noAcess')
@@ -85,7 +85,7 @@ app.get('/chat/:id/messages', (request, response) => {
 })
 
 // liste af users router
-app.get('/users', (request, response)=>{
+app.get('/users',(requiredLevel(2)), (request, response)=>{
     response.render('userList', {users: UserController.getAllUsers()})
 })
 
