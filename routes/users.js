@@ -18,9 +18,13 @@ response.render('createUser')
 });
 
 userRouter.post('/adduser', async (request, response)=>{
-        const {username, password} = request.body
-        await UserController.addUser(username, password)
-        response.redirect('/')
+        const {username, password, level} = request.body
+        await UserController.addUser(username, password, level)
+        const userLevel = parseInt(request.body.level);
+        if (userLevel >= 1 && userLevel <= 3) {
+        request.session.userLevel = userLevel;
+        response.redirect('/');
+    }
 })
 
 export default userRouter

@@ -55,12 +55,7 @@ app.use('/users', userRouter)
 app.use('/chats', chatRouter)
 
 app.post('/login', (request, response) => {
-    const userLevel = parseInt(request.body.level);
-    
-    if (userLevel >= 1 && userLevel <= 3) {
-        request.session.userLevel = userLevel;
-        response.redirect('/');
-    }
+      response.redirect('/')
 });
 
 

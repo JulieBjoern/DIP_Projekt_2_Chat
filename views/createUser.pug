@@ -4,12 +4,15 @@ block content
     h1 Opret bruger
     
     form(action="/users/adduser" method="POST")
-        div
-            label(for="username") Brugernavn
-            input#username(type="text" name="username" required)
-        
-        div
-            label(for="password") Adgangskode
-            input#password(type="password" name="password" required)
-        
-        button(type="submit") Opret bruger
+      div
+        label(for="username") Brugernavn
+        input#username(type="text" name="username" required)
+      
+      div
+        label(for="password") Adgangskode
+        input#password(type="password" name="password" required)
+      div
+        label(for="level") level
+        input#level(type="level" name="level" required)
+      
+      button(type="submit") Opret bruger

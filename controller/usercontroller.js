@@ -4,8 +4,8 @@ import Archive from '../archive.js'
 class UserController {
     static users = [new User('ole', '123', 0)]
 
-    static async addUser(username, password){
-        UserController.users.push(new User(username, password))
+    static async addUser(username, password, level){
+        UserController.users.push(new User(username, password, level))
         await Archive.writeFile('data/users.json', JSON.stringify(UserController.users))
     }
 
