@@ -20,6 +20,11 @@ class UserController {
         }
     }
 
+    // metode til at hente en specifik user
+    static getUserById(id) {    
+        return UserController.users.find(user => user.id === id);
+    }
+
      // metode til at hente alle users
     static getAllUsers() {
         return UserController.users;

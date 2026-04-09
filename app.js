@@ -84,6 +84,13 @@ app.get('/users',(requiredLevel(2)), (request, response)=>{
     response.render('userList', {users: UserController.getAllUsers()})
 })
 
+// specifik user router
+app.get('/users/:id',(request,response)=>{
+    const userId = Number(request.params.id)
+    const user = UserController.getUserById(userId)
+    response.render('specificUser',{user})
+})
+
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
     response.status(404).send('404 - Du tabte')
