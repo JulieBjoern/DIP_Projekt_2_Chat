@@ -1,32 +1,26 @@
-html 
-    head
-        title forside
+extends layout
 
-        link(rel="stylesheet", href="/css/styles.css")
-    body
-        div 
-            p.loggedInAs Du er nu logget ind som ...
-            p Her er en liste over chats:   
-            table 
-                if chats && chats.length
-                    each chat in chats
-                        tr 
-                            td
-                                a(href=`/chat/${chat.id}/messages`, class='chat-link', data-id=chat.id)= chat.name
+block content
+    div 
+        p.loggedInAs Du er nu logget ind som ...
+        p Her er en liste over chats:   
 
-                else
-                    tr
-                        td Der er ikke oprettet nogle chats
-            
-            a(href="/chats/addchat")
-                button
-                    strong opret
-                        | chat
-            button  
-            a(href="/users/adduser")
-                strong opret 
-                    | bruger
-            button.logout
-                strong log ud
+        table 
+            if chats && chats.length
+                each chat in chats
+                    tr 
+                        td
+                            a(href=`/chat/${chat.id}/messages`, class='chat-link')= chat.name
+            else
+                tr
+                    td Der er ikke oprettet nogle chats
+
+        a(href="/chats/addchat")
+            button(type="button") Opret chat
+
+        a(href="/users/adduser")
+            button(type="button") Opret bruger
+
+        button.logout(type="button") Log ud
 
 

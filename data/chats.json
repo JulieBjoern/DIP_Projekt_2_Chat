@@ -57,5 +57,27 @@
     "ownerId": 0,
     "createdAt": "2026-04-08T09:14:47.661Z",
     "messages": []
+  },
+  {
+    "id": 5,
+    "name": "le",
+    "ownerId": 0,
+    "createdAt": "2026-04-09T07:09:25.373Z",
+    "messages": [
+      {
+        "id": 3,
+        "text": "hej",
+        "ownerId": 0,
+        "chatId": 5,
+        "createdAt": "2026-04-09T07:09:32.146Z"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "test00",
+    "ownerId": 0,
+    "createdAt": "2026-04-09T07:49:54.471Z",
+    "messages": []
   }
 ]

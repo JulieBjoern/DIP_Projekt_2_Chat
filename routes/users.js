@@ -11,14 +11,7 @@ userRouter.get('/login', (request, response)=>{
 
 userRouter.post('/login', (request, response)=>{
     const {username, password} = request.body
-    const isItAValidUser  = UserController.validateUser(username, password)
-    if (isItAValidUser) {
-        request.session.isItAValidUser = true
-        request.session.userId = isItAValidUser.id
-        response.render('frontpage', {isItAValidUser})
-    } else {
-        response.render('noAccess', {})
-    }
+        response.render('frontpage')
 })
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
