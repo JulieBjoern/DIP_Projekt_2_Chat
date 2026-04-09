@@ -1,13 +1,18 @@
 extends layout
 
 block content
-    div
-        p Her er den specifikke user:
+    main
+        header
+            h1 Specifik user
+            a(href="/") Gå tilbage
 
-        if user
-            div.userBox
-                p Navn: #{user.username}
-                p Level: #{user.level}
-                p Oprettelsesdato: #{user.createdAt}
-        else
-            p Brugeren blev ikke fundet
+        div
+            p Her er den specifikke user:
+
+            if user
+                div.userBox
+                    p Navn: #{user.username}
+                    p Level: #{user.level}
+                    p Oprettelsesdato: #{user.createdAt}
+            else
+                p Brugeren blev ikke fundet
