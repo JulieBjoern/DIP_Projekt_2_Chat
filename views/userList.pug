@@ -9,7 +9,7 @@ html
                     each user in users
                         tr 
                             td
-                                a(href=`#`,  class='user-link', data-id=user.id)= user.username
+                                a(href=`/users/${user.id}`,  class='user-link', data-id=user.id)= user.username
 
                 else
                     tr
