@@ -39,6 +39,19 @@ div {
     background-color: #f5f0ed;
 }
 
+div.userBox {
+    width: 100%;
+    margin: 14px 0 0;
+    padding: 16px;
+    border: 1px solid #c8aebb;
+    border-radius: 12px;
+    background-color: #efe3ea;
+}
+
+div.userBox p {
+    margin: 5px 0;
+}
+
 
 p {
     font-size: 1em;
@@ -141,7 +154,6 @@ main > header { /* main > header betyder at det kun vil gælde header elementet 
 
 article.message {
     border: 1px solid #c8aebb;
-    border-left: 4px solid #9b7388;
     background-color: #efe3ea;
     padding: 12px;
     margin: 10px 0;
