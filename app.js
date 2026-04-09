@@ -38,7 +38,7 @@ const requiredLevel = (minLevel) => {
         if (request.session.userLevel >= minLevel) {
             return next();
         }
-        if (!request.session.userlavel) {
+        if (!request.session.userLevel) {
             return response.render('login')
         }
         response.render('noAcess')
@@ -61,14 +61,10 @@ app.post('/login', async (request, response) => {
 
     if (user) {
         request.session.userLevel = parseInt(user.level);
-        
-        request.session.save((err) => {
-            if (err) return response.send("Fejl ved lagring af session");
+
             console.log("Logget ind! Level:", request.session.userLevel);
             response.redirect('/');
-        });
-    } else {
-        response.render('login', { error: "Forkert login" });
+        
     }
 });
 
