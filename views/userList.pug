@@ -1,15 +1,20 @@
 extends layout
 
 block content
-    div
-        p Her er en liste over users:
+    main
+        header
+            h1 Liste over users
+            a(href="/") Gå tilbage
 
-        table
-            if users && users.length
-                each user in users
+        div
+            p Her er en liste over users:
+
+            table
+                if users && users.length
+                    each user in users
+                        tr
+                            td
+                                a(href=`/users/${user.id}`, class='user-link', data-id=user.id)= user.username
+                else
                     tr
-                        td
-                            a(href=`/users/${user.id}`, class='user-link', data-id=user.id)= user.username
-            else
-                tr
-                    td Der er ikke oprettet nogle users
+                        td Der er ikke oprettet nogle users

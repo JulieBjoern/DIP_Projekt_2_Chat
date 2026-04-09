@@ -1,8 +1,14 @@
 extends layout
 
 block content
-    h1 Her kan du logge ind
-    form(action="/login", method="post")
+    main
+        header
+            h1 Login
+            a(href="/") Gå tilbage
+
+        div
+            h2 Her kan du logge ind
+            form(action="/login", method="post")
         input(type="text", name="username", placeholder="brugernavn")
         input(type="password", name="password", placeholder="kodeord")
         button(type="submit") Login

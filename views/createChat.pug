@@ -1,7 +1,12 @@
 extends layout
 
 block content
-    h1 Opret en chat
-    form(action="/chats/addchat", method="post")
-        input(type="text", name="name", placeholder="chat navn")
-        button(type="submit") Opret chat
+    main
+        header
+            h1 Opret en chat
+            a(href="/") Gå tilbage
+
+        div
+            form(action="/chats/addchat", method="post")
+                input(type="text", name="name", placeholder="chat navn")
+                button(type="submit") Opret chat
