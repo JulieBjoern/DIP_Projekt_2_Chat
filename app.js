@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import session from 'express-session'
 import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
@@ -29,6 +29,18 @@ app.use(session({
     resave: true
 }))
 
+const requiredLevel = (minLevel) => {
+    return (request, response, next) => {
+        if (request.session.userLevel >= minLevel) {
+            return next();
+        }
+        if (!requeast.session.userLevel) {
+            return response.render('login')
+        }
+        response.render('noAcess')
+    };
+};
+
 //ROUTES 
 
 // user router til login/logout og user relaterede ting
@@ -36,6 +48,15 @@ app.use('/users', userRouter)
 
 
 // chat router 
+
+app.post('/login', (request, response) => {
+    const userLevel = parseInt(request.body.level);
+    
+    if (userLevel >= 1 && userLevel <= 3) {
+        request.session.userLevel = userLevel;
+        response.redirect('/');
+    }
+});
 
 
 app.get('/', (request, response)=>{
