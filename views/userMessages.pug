@@ -1,6 +1,12 @@
-extends layout 
+extends layout
+
 block content
-        div 
+    main
+        header
+            h1= `Beskeder fra ${user.username}`
+            a(href="/") Gå tilbage
+
+        div
             p Her er en liste over beskederne fra #{user.username}:
 
             table
