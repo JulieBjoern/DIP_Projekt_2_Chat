@@ -32,13 +32,14 @@ app.use(session({
     resave: true
 }))
 
+
 const requiredLevel = (minLevel) => {
     return (request, response, next) => {
 
         if (request.session.userLevel >= minLevel) {
             return next();
         }
-        if (!request.session.userlavel) {
+        if (!request.session.userLevel) {
             return response.render('login')
         }
         response.render('noAcess')
@@ -60,49 +61,26 @@ app.post('/login', async (request, response) => {
     const user = await UserController.getUser(username, password);
 
     if (user) {
+        request.session.userName = user.username;
         request.session.userLevel = parseInt(user.level);
-        request.session.save((err) => {
-            if (err) return response.send("Fejl ved lagring af session");
             console.log("Logget ind! Level:", request.session.userLevel);
             response.redirect('/');
-        });
-    } else {
-        response.render('login', { error: "Forkert login" });
+        
     }
 });
 
 app.get('/', (request, response)=>{
-        response.render('frontpage', {chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
+        response.render('frontpage', {
+            chats: ChatController.getAllChats(),
+            userName: request.session.userName || 'du er ikke logget ind'
+        }) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
 
-
-// specifik chat side  TODO: (!!!!!!!kan også lægges ind i chats.js routen!!!!!!)
-app.get('/chat/:id/messages', (request, response) => {
-    const id = Number(request.params.id)
-    const chat = ChatController.getChatById(id)
-
-    if (!chat) {
-        return response.status(404).send('404 - Du tabte')
-    }
-
-    const messages = ChatController.getMessagesByChatId(id) || []
-    response.render('specificChat', { chat, messages })
-})
-
-// liste af users router
-app.get('/users',(requiredLevel(2)), (request, response)=>{
-    response.render('userList', {users: UserController.getAllUsers()})
-})
+// user router
 app.use('/users', userRouter)
 
 
-// specifik user router
-app.get('/users/:id',(request,response)=>{
-    const userId = Number(request.params.id)
-    const user = UserController.getUserById(userId)
-    response.render('specificUser',{user})
-})
 
 // liste af users messages
 app.use('/users', userRouter)
