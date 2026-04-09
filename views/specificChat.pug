@@ -1,5 +1,26 @@
+doctype html
 html
-    header 
-        title 
+    head
+        title= chat.name
+        link(rel="stylesheet", href="/css/styles.css")
+        script(src="/js/client.js", defer)
     body
-        h1 her er beskederne for ...
+        main
+            header
+                h1= chat.name
+                a(href="/") Tilbage til forsiden
+
+            div#message-list
+                if messages && messages.length > 0
+                    each message in messages
+                        article.message(data-message-id=message.id)
+                            p= message.text
+                            p Oprettet #{message.createdAt}
+                            button(type="button", data-message-id=message.id) Slet
+                else
+                    p Der er ingen beskeder endnu.
+
+            div
+                form#message-form(data-chat-id=chat.id)
+                    input#message-input(type="text", placeholder="Skriv en besked🤔...", required) 
+                    button(type="submit") Send

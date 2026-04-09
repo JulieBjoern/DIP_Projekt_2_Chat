@@ -1,9 +1,8 @@
-import express, { request, response } from 'express'
+import express from 'express'
 import session from 'express-session'
 import userRouter from './routes/users.js'
 import ChatController from './controller/chatcontroller.js'
 import UserController from './controller/usercontroller.js'
-import Chat from './model/chat.js'
 import chatRouter from './routes/chats.js'
 
 // luk ikke serveren før data er indlæst
@@ -50,12 +49,17 @@ app.get('/', (request, response)=>{
 
 app.use('/users', userRouter)
 
-// specifik chat router
-app.get('/chat/:id/messages',(request, response)=>{
-const id = parseInt(request.params.id)
-const messages = ChatController.getMessagesByChatId(id)
-    response.render('specificChat', {id, messages} )
+// specifik chat side  TODO: (!!!!!!!kan også lægges ind i chats.js routen!!!!!!)
+app.get('/chat/:id/messages', (request, response) => {
+    const id = Number(request.params.id)
+    const chat = ChatController.getChatById(id)
 
+    if (!chat) {
+        return response.status(404).send('404 - Du tabte')
+    }
+
+    const messages = ChatController.getMessagesByChatId(id) || []
+    response.render('specificChat', { chat, messages })
 })
 
 // liste af users router
@@ -74,4 +78,4 @@ app.listen(8000, ()=>{
 
 }
 
-startServer()
+startServer() 
