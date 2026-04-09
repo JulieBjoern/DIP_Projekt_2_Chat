@@ -1,9 +1,6 @@
-doctype html
-html
-  head
-    title Opret Bruger
-    meta(charset="UTF-8")
-  body
+extends layout
+
+block content
     h1 Opret bruger
     
     form(action="/users/adduser" method="POST")
