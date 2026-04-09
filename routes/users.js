@@ -1,5 +1,6 @@
-import express from 'express'
+import express, { request } from 'express'
 import UserController from '../controller/usercontroller.js'
+import ChatController from '../controller/chatcontroller.js'
 
 const userRouter = express.Router()
 
@@ -28,6 +29,14 @@ userRouter.post('/adduser', async (request, response)=>{
         response.redirect('/');
     })
     }
+})
+
+userRouter.get('/:id/messages',(request,response)=>{
+const userId = Number(request.params.id)
+const user = UserController.getUserById(userId)
+const messages = ChatController.getMessagesBySenderId(userId)
+
+response.render('userMessages',{user,messages})
 })
 
 export default userRouter

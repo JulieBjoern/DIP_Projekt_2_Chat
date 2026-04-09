@@ -101,6 +101,9 @@ app.get('/users/:id',(request,response)=>{
     response.render('specificUser',{user})
 })
 
+// liste af users messages
+app.use('/users', userRouter)
+
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
     response.status(404).send('404 - Du tabte')
