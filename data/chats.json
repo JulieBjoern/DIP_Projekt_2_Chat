@@ -78,6 +78,14 @@
     "name": "test00",
     "ownerId": 0,
     "createdAt": "2026-04-09T07:49:54.471Z",
-    "messages": []
+    "messages": [
+      {
+        "id": 4,
+        "text": "hej",
+        "ownerId": 0,
+        "chatId": 6,
+        "createdAt": "2026-04-09T07:56:14.654Z"
+      }
+    ]
   }
 ]
