@@ -11,11 +11,10 @@ block content
 
             table
                 if messages && messages.length
-                    each message in messages
+                    each message, i in messages
                         tr 
                             td
-                                a(href=`/users/${user.id}/messages`, class='message-link')
-                                | #{message.text}, skrevet i chat: #{chat.name}, sendt: #{message.createdAt}
+                                | #{message.text} (i chat: #{chats[i].name}) #{message.createdAt}
             
                 else
                     tr

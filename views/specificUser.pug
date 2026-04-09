@@ -14,5 +14,7 @@ block content
                     p Navn: #{user.username}
                     p Level: #{user.level}
                     p Oprettelsesdato: #{user.createdAt}
+                    a(href=`/users/${user.id}/messages`, class='user-link', data-id=user.id)
+                        | Se sendte beskeder
             else
                 p Brugeren blev ikke fundet

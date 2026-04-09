@@ -32,15 +32,23 @@ userRouter.post('/adduser', async (request, response)=>{
     }
 })
 
-userRouter.get('/:id/messages',(request,response)=>{
-const userId = Number(request.params.id)
-const user = UserController.getUserById(userId)
-const messages = ChatController.getMessagesBySenderId(userId)
-const messageId = ChatController.messageId
-const chat = ChatController.getChatById(messageId)
+userRouter.get('/:id/messages', (req, res) => {
+    const userId = Number(req.params.id);
+    const user = UserController.getUserById(userId);
+    const messages = ChatController.getMessagesBySenderId(userId);
 
-response.render('userMessages',{user,messages,chat})
-})
+    // Hent alle chats som disse beskeder tilhører
+    const chats = messages.map(msg => {
+        return ChatController.getChatById(msg.chatId);
+    });
+
+    res.render('userMessages', {
+        user,
+        messages,
+        chats
+    });
+});
+
 
 // liste af users router
 userRouter.get('/', (request, response)=>{
