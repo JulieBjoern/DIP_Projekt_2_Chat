@@ -32,6 +32,7 @@ app.use(session({
     resave: true
 }))
 
+
 const requiredLevel = (minLevel) => {
     return (request, response, next) => {
 
@@ -69,32 +70,10 @@ app.get('/', (request, response)=>{
     }
 )
 
+// user router
 app.use('/users', userRouter)
 
-// specifik chat side  TODO: (!!!!!!!kan også lægges ind i chats.js routen!!!!!!)
-app.get('/chat/:id/messages', (request, response) => {
-    const id = Number(request.params.id)
-    const chat = ChatController.getChatById(id)
 
-    if (!chat) {
-        return response.status(404).send('404 - Du tabte')
-    }
-
-    const messages = ChatController.getMessagesByChatId(id) || []
-    response.render('specificChat', { chat, messages })
-})
-
-// liste af users router
-app.get('/users',(requiredLevel(2)), (request, response)=>{
-    response.render('userList', {users: UserController.getAllUsers()})
-})
-
-// specifik user router
-app.get('/users/:id',(request,response)=>{
-    const userId = Number(request.params.id)
-    const user = UserController.getUserById(userId)
-    response.render('specificUser',{user})
-})
 
 // middleware der fanger resterende requests
 app.use((request, response, next)=>{
