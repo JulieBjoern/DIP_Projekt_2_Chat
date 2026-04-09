@@ -65,6 +65,7 @@ app.post('/login', (request, response) => {
 
 
 app.get('/', (request, response)=>{
+        const logInName = UserController.get
         response.render('frontpage', { chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
