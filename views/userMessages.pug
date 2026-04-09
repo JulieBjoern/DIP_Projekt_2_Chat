@@ -1,7 +1,5 @@
-html
-    header 
-        title 
-    body
+extends layout 
+block content
         div 
             p Her er en liste over beskederne fra #{user.username}:
 
@@ -11,7 +9,7 @@ html
                         tr 
                             td
                                 a(href=`/users/${user.id}/messages`, class='message-link')
-                                | #{message.text}, skrevet i chat med id: #{message.chatId}, sendt: #{message.createdAt}
+                                | #{message.text}, skrevet i chat: #{chat.name}, sendt: #{message.createdAt}
             
                 else
                     tr

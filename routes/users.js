@@ -36,8 +36,10 @@ userRouter.get('/:id/messages',(request,response)=>{
 const userId = Number(request.params.id)
 const user = UserController.getUserById(userId)
 const messages = ChatController.getMessagesBySenderId(userId)
+const messageId = ChatController.messageId
+const chat = ChatController.getChatById(messageId)
 
-response.render('userMessages',{user,messages})
+response.render('userMessages',{user,messages,chat})
 })
 
 // liste af users router

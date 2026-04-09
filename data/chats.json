@@ -18,6 +18,13 @@
         "ownerId": 0,
         "chatId": 1,
         "createdAt": "2026-04-08T10:06:02.516Z"
+      },
+      {
+        "id": 4,
+        "text": "Tror snart vi er done!",
+        "ownerId": 0,
+        "chatId": 1,
+        "createdAt": "2026-04-09T10:20:17.325Z"
       }
     ]
   },
