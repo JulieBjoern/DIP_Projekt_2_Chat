@@ -24,6 +24,11 @@ class UserController {
     static getAllUsers() {
         return UserController.users;
     }
+   
+static getUser(username, password) {
+  
+    return this.users.find(u => u.username === username && u.password === password);
+}
 }
 
 export default UserController
