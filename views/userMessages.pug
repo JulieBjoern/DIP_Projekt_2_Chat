@@ -1,0 +1,18 @@
+html
+    header 
+        title 
+    body
+        div 
+            p Her er en liste over beskederne fra #{user.username}:
+
+            table
+                if messages && messages.length
+                    each message in messages
+                        tr 
+                            td
+                                a(href=`/users/${user.id}/messages`, class='message-link')
+                                | #{message.text}, skrevet i chat med id: #{message.chatId}, sendt: #{message.createdAt}
+            
+                else
+                    tr
+                        td Der er ikke oprettet nogle chats
