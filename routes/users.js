@@ -40,15 +40,15 @@ response.render('userMessages',{user,messages})
 })
 
 // liste af users router
-userRouter.get('/users',(requiredLevel(2)), (request, response)=>{
+userRouter.get('/', (request, response)=>{
     response.render('userList', {users: UserController.getAllUsers()})
 })
 
 // specifik user router
-userRouter.get('/users/:id',(request,response)=>{
+userRouter.get('/:id',(request,response)=>{
     const userId = Number(request.params.id)
     const user = UserController.getUserById(userId)
-    response.render('specificUser',{user})
+    response.render('specificUser',{user, title: 'Specifik User'})
 })
 
 export default userRouter

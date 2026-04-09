@@ -1,16 +1,13 @@
-html
-    header 
-        title Specifik User
+extends layout
 
-    body
-        div
-            p Her er den specifikke user:
+block content
+    div
+        p Her er den specifikke user:
 
-            if user
-                div.userBox
-                    p Navn: #{user.username}
-                    p Level: #{user.level}
-                    p Oprettelsesdato: #{user.createdAt}
-
-            else
-                p Brugeren blev ikke fundet
+        if user
+            div.userBox
+                p Navn: #{user.username}
+                p Level: #{user.level}
+                p Oprettelsesdato: #{user.createdAt}
+        else
+            p Brugeren blev ikke fundet
