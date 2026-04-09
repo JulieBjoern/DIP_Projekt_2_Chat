@@ -1,8 +1,7 @@
-html 
-    head 
-        title Opret chat
-    body
-        h1 Opret en chat
-        form(action="/chats/addchat", method="post")
-            input(type="text", name="name", placeholder="chat navn")
-            button(type="submit") Opret chat
+extends layout
+
+block content
+    h1 Opret en chat
+    form(action="/chats/addchat", method="post")
+        input(type="text", name="name", placeholder="chat navn")
+        button(type="submit") Opret chat
