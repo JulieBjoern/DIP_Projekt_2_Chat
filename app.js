@@ -61,7 +61,6 @@ app.post('/login', async (request, response) => {
 
     if (user) {
         request.session.userLevel = parseInt(user.level);
-        
         request.session.save((err) => {
             if (err) return response.send("Fejl ved lagring af session");
             console.log("Logget ind! Level:", request.session.userLevel);
@@ -73,8 +72,7 @@ app.post('/login', async (request, response) => {
 });
 
 app.get('/', (request, response)=>{
-        const logInName = UserController.get
-        response.render('frontpage', { chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
+        response.render('frontpage', {chats: ChatController.getAllChats()}) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
 
