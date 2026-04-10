@@ -99,7 +99,15 @@
     "name": "Test 123",
     "ownerId": 0,
     "createdAt": "2026-04-10T07:57:55.027Z",
-    "messages": []
+    "messages": [
+      {
+        "id": 8,
+        "text": "test2",
+        "ownerId": 0,
+        "chatId": 8,
+        "createdAt": "2026-04-10T08:43:41.593Z"
+      }
+    ]
   },
   {
     "id": 9,
