@@ -16,8 +16,8 @@ block content
                                 span.chat-link.disabled-link= chat.name
                         td
                             if isLoggedIn && userLevel >= 2 && (userLevel === 3 || chat.ownerId === userId)
-                                button.edit-btn(type="button", onclick=`editChat(${chat.id}, '${chat.name}')`) Rediger ✏️
-                                button.delete-btn(type="button", onclick=`deleteChat(${chat.id})`) Slet 🗑️
+                                button.edit-btn.edit-chat-btn(type="button", data-chat-id=chat.id, data-chat-name=chat.name) Rediger ✏️
+                                button.delete-btn.delete-chat-btn(type="button", data-chat-id=chat.id) Slet 🗑️
             else
                 tr
                     td Der er ikke oprettet nogle chats
@@ -39,37 +39,6 @@ block content
                 button.logout(type="submit") Log ud
         else
             a(href="/users/login")
-                button.logout(type="button") Log ind
+                button.login(type="button") Log ind
             a(href="/users/adduser")
                 button(type="button") Opret bruger🤠
-
-    script. 
-        async function deleteChat(chatId) {
-            const response = await fetch(`/chats/${chatId}`, {
-                method: "DELETE"
-            })
-            
-            if (response.ok) {
-                location.reload()
-            }
-        }
-
-        async function editChat(chatId, currentName) {
-            const newName = prompt("Rediger chat-navn:", currentName)
-            
-            if (newName === null || newName.trim() === "") {
-                return
-            }
-            
-            const response = await fetch(`/chats/${chatId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name: newName.trim() })
-            })
-            
-            if (response.ok) {
-                location.reload()
-            }
-        }

@@ -87,3 +87,42 @@ if (messageForm && messageList && messageInput) {
 		}
 	});
 }
+
+// Håndter redigering/sletning af chats fra forsiden.
+document.addEventListener('click', async (event) => {
+	const deleteChatButton = event.target.closest('.delete-chat-btn');
+	if (deleteChatButton) {
+		const chatId = deleteChatButton.dataset.chatId;
+		const response = await fetch(`/chats/${chatId}`, {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			location.reload();
+		}
+		return;
+	}
+
+	const editChatButton = event.target.closest('.edit-chat-btn');
+	if (editChatButton) {
+		const chatId = editChatButton.dataset.chatId;
+		const currentName = editChatButton.dataset.chatName || '';
+		const newName = prompt('Rediger chat-navn:', currentName);
+
+		if (newName === null || newName.trim() === '') {
+			return;
+		}
+
+		const response = await fetch(`/chats/${chatId}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ name: newName.trim() })
+		});
+
+		if (response.ok) {
+			location.reload();
+		}
+	}
+});
