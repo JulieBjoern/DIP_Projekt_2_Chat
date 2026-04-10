@@ -90,7 +90,7 @@ userRouter.get('/', requiredLevel(3), (request, response) => {
 });
 
 // specifik user router
-userRouter.get('/:id',(request,response)=>{
+userRouter.get('/:id', requiredLevel(3),(request,response)=>{
     const userId = Number(request.params.id)
     const user = UserController.getUserById(userId)
     response.render('specificUser',{user, title: 'Specifik User'})
