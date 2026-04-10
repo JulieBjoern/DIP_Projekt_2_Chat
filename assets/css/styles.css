@@ -123,6 +123,13 @@ button.logout {
     bottom: 20px;
 }
 
+button.login {
+    background-color: #399c40;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
 
 button.delete-message {
     background-color: #9b3d4f;
