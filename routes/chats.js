@@ -1,6 +1,6 @@
 import express from 'express'
 import ChatController from '../controller/chatcontroller.js'
-import users from '../routes/users.js'
+import userRouter, { requiredLevel } from './userRouter.js';
 
 const chatRouter = express.Router()
 
@@ -8,11 +8,11 @@ chatRouter.get('/addchat', (request, response) => {
     response.render('createChat')
 })
 
-chatRouter.post('/addchat', async (request, response) => {
-    const { name } = request.body
-    const ownerId = request.session.userId || 0
-    await ChatController.createChat(name, ownerId)
-    response.redirect('/')
+chatRouter.post('/addchat',requiredLevel(2), async (request, response) => {
+const { name } = request.body
+const ownerId = request.session.userId || 0
+await ChatController.createChat(name, ownerId)
+response.redirect('/')
 })
 
 chatRouter.post('/:id/messages', async (request, response) => {
@@ -53,7 +53,7 @@ chatRouter.get('/chat/:id/messages', (request, response) => {
     });
 })
 
-chatRouter.delete('/:id/messages/:messageId', async (request, response) => {
+chatRouter.delete('/:id/messages/:messageId',requiredLevel(2), async (request, response) => {
     const chatId = Number(request.params.id)
     const messageId = Number(request.params.messageId)
 
@@ -72,7 +72,7 @@ chatRouter.delete('/:id/messages/:messageId', async (request, response) => {
 })
 
 // Slet en chat
-chatRouter.delete('/:id', async (request, response) => {
+chatRouter.delete('/:id',requiredLevel(2), async (request, response) => {
     const chatId = Number(request.params.id)
     const userLevel = request.session.userLevel || 0
     const userId = request.session.userId || 0
@@ -98,7 +98,7 @@ chatRouter.delete('/:id', async (request, response) => {
 })
 
 // Rediger en chat
-chatRouter.put('/:id', async (request, response) => {
+chatRouter.put('/:id',requiredLevel(2), async (request, response) => {
     const chatId = Number(request.params.id)
     const { name } = request.body
     const userLevel = request.session.userLevel || 0
