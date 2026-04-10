@@ -67,7 +67,7 @@ userRouter.post('/adduser', async (request, response)=>{
     }
 })
 
-userRouter.get('/:id/messages', (req, res) => {
+userRouter.get('/:id/messages', requiredLevel(3), (req, res) => {
     const userId = Number(req.params.id);
     const user = UserController.getUserById(userId);
     const messages = ChatController.getMessagesBySenderId(userId);
@@ -92,7 +92,7 @@ userRouter.get('/', requiredLevel(3), (request, response) => {
 });
 
 // specifik user router
-userRouter.get('/:id',(request,response)=>{
+userRouter.get('/:id', requiredLevel(3),(request,response)=>{
     const userId = Number(request.params.id)
     const user = UserController.getUserById(userId)
     response.render('specificUser',{user, title: 'Specifik User'})
