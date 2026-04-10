@@ -2,7 +2,23 @@ import express, { request } from 'express'
 import UserController from '../controller/usercontroller.js'
 import ChatController from '../controller/chatcontroller.js'
 
+
 const userRouter = express.Router()
+
+
+const requiredLevel = (minLevel) => {
+    return (request, response, next) => {
+
+        if (request.session.userLevel >= minLevel) {
+            return next();
+        }
+        if (!request.session.userLevel) {
+            return response.render('login')
+        }
+        response.render('noAcess')
+    };
+};
+
 
 
 // ROUTES for login 
@@ -10,10 +26,20 @@ userRouter.get('/login', (request, response)=>{
     response.render('login', {})
 })
 
-userRouter.post('/login', (request, response)=>{
-    const {username, password} = request.body
-        response.render('frontpage')
-})
+userRouter.post('/login', async (request, response) => {
+    const { username, password } = request.body;
+    
+    const user = await UserController.getUser(username, password);
+
+    if (user) {
+        request.session.userName = user.username;
+        request.session.userLevel = parseInt(user.level);
+
+            console.log("Logget ind! Level:", request.session.userLevel);
+            response.redirect('/');
+        
+    }
+});
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
 });
@@ -51,9 +77,10 @@ userRouter.get('/:id/messages', (req, res) => {
 
 
 // liste af users router
-userRouter.get('/', (request, response)=>{
-    response.render('userList', {users: UserController.getAllUsers()})
-})
+// Rækkefølge: Sti -> Middleware -> Handler
+userRouter.get('/', requiredLevel(2), (request, response) => {
+    response.render('userList', { users: UserController.getAllUsers() });
+});
 
 // specifik user router
 userRouter.get('/:id',(request,response)=>{

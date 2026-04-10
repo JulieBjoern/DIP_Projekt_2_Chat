@@ -33,19 +33,6 @@ app.use(session({
 }))
 
 
-const requiredLevel = (minLevel) => {
-    return (request, response, next) => {
-
-        if (request.session.userLevel >= minLevel) {
-            return next();
-        }
-        if (!request.session.userLevel) {
-            return response.render('login')
-        }
-        response.render('noAcess')
-    };
-};
-
 //ROUTES 
 
 // user router til login/logout og user relaterede ting
@@ -55,20 +42,7 @@ const requiredLevel = (minLevel) => {
 // chat router 
 app.use('/chats', chatRouter)
 
-app.post('/login', async (request, response) => {
-    const { username, password } = request.body;
-    
-    const user = await UserController.getUser(username, password);
 
-    if (user) {
-        request.session.userName = user.username;
-        request.session.userLevel = parseInt(user.level);
-
-            console.log("Logget ind! Level:", request.session.userLevel);
-            response.redirect('/');
-        
-    }
-});
 
 app.get('/', (request, response)=>{
         response.render('frontpage', {
