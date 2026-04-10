@@ -6,7 +6,7 @@ import ChatController from '../controller/chatcontroller.js'
 const userRouter = express.Router()
 
 
-const requiredLevel = (minLevel) => {
+export const requiredLevel = (minLevel) => {
     return (request, response, next) => {
 
         if (request.session.userLevel >= minLevel) {
