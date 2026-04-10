@@ -65,7 +65,7 @@ userRouter.post('/adduser', async (request, response)=>{
     }
 })
 
-userRouter.get('/:id/messages', (req, res) => {
+userRouter.get('/:id/messages', requiredLevel(3), (req, res) => {
     const userId = Number(req.params.id);
     const user = UserController.getUserById(userId);
     const messages = ChatController.getMessagesBySenderId(userId);
