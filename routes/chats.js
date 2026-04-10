@@ -4,15 +4,15 @@ import users from '../routes/users.js'
 
 const chatRouter = express.Router()
 
-chatRouter.get('/addchat', (request, response)=>{
+chatRouter.get('/addchat', (request, response) => {
     response.render('createChat')
 })
 
 chatRouter.post('/addchat', async (request, response) => {
-const { name } = request.body
-const ownerId = request.session.userId || 0
-await ChatController.createChat(name, ownerId)
-response.redirect('/')
+    const { name } = request.body
+    const ownerId = request.session.userId || 0
+    await ChatController.createChat(name, ownerId)
+    response.redirect('/')
 })
 
 chatRouter.post('/:id/messages', async (request, response) => {
@@ -26,7 +26,15 @@ chatRouter.post('/:id/messages', async (request, response) => {
         return response.status(404).json({ message: 'Chat ikke fundet' })
     }
 
-    response.status(201).json(message) // 201 = Created, alt er gået godt og der er oprettet en ressource (besked)
+    const userLevel = request.session.userLevel
+
+    response.status(201).json({
+        id: message.id,
+        text: message.text,
+        createdAt: message.createdAt,
+        ownerId: message.ownerId,
+        userLevel: userLevel
+    })
 })
 
 // specifik chat side 
@@ -39,8 +47,9 @@ chatRouter.get('/chat/:id/messages', (request, response) => {
     }
 
     const messages = ChatController.getMessagesByChatId(id) || []
-    response.render('specificChat', { chat, messages,
-    userLevel: request.session.userLevel
+    response.render('specificChat', {
+        chat, messages,
+        userLevel: request.session.userLevel
     });
 })
 
@@ -48,13 +57,18 @@ chatRouter.delete('/:id/messages/:messageId', async (request, response) => {
     const chatId = Number(request.params.id)
     const messageId = Number(request.params.messageId)
 
+    const userLevel = request.session.userLevel
+
+
+    if (userLevel === 1) {
+        return response.status(403).json({ message: 'Du har ikke rettigheder til at slette beskeder' })
+    }
+
     const deletedMessage = await ChatController.deleteMessage(chatId, messageId)
 
     if (!deletedMessage) {
         return response.status(404).json({ message: 'Besked ikke fundet' })
     }
-
-    response.json({ message: 'Besked slettet' })
 })
 
 // Slet en chat

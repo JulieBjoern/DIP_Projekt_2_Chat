@@ -17,15 +17,18 @@ function createMessageElement(message) {
 	const createdAtParagraph = document.createElement('p');
 	createdAtParagraph.textContent = `Oprettet ${message.createdAt}`;
 
-	const deleteButton = document.createElement('button');
-	deleteButton.type = 'button';
-	deleteButton.className = 'delete-message';
-	deleteButton.dataset.messageId = message.id;
-	deleteButton.textContent = 'Slet';
+	 messageElement.appendChild(textParagraph);
+    messageElement.appendChild(createdAtParagraph);
 
-	messageElement.appendChild(textParagraph);
-	messageElement.appendChild(createdAtParagraph);
-	messageElement.appendChild(deleteButton);
+    
+    if (message.userLevel > 1) {
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-message';
+        deleteButton.dataset.messageId = message.id;
+        deleteButton.textContent = 'Slet';
+
+        messageElement.appendChild(deleteButton);
+    }
 
 	return messageElement;
 }
