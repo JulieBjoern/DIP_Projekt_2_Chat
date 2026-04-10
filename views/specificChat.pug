@@ -12,7 +12,9 @@ block content
                     article.message(data-message-id=message.id)
                         p= message.text
                         p Oprettet #{message.createdAt}
+                        if(userLevel > 1){
                         button.delete-message(type="button", data-message-id=message.id) Slet
+                        }
             else
                 p Der er ingen beskeder endnu.
 
