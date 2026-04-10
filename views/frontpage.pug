@@ -25,12 +25,6 @@ block content
             button(type="button" disabled) Opret chat💬
 
         if isLoggedIn
-            a(href="/users/adduser")
-                button(type="button") Opret bruger🤠
-        else
-            button(type="button" disabled) Opret bruger🤠
-
-        if isLoggedIn
             a(href="/users")
                 button(type="button") Se liste over brugere🤠🤠
         else
@@ -42,5 +36,7 @@ block content
         else
             a(href="/users/login")
                 button.logout(type="button") Log ind
+            a(href="/users/adduser")
+                button(type="button") Opret bruger🤠
 
 

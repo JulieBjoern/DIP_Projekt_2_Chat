@@ -1,5 +1,6 @@
 import express from 'express'
 import ChatController from '../controller/chatcontroller.js'
+import users from '../routes/users.js'
 
 const chatRouter = express.Router()
 
@@ -38,7 +39,9 @@ chatRouter.get('/chat/:id/messages', (request, response) => {
     }
 
     const messages = ChatController.getMessagesByChatId(id) || []
-    response.render('specificChat', { chat, messages })
+    response.render('specificChat', { chat, messages,
+    userLevel: request.session.userLevel
+    });
 })
 
 chatRouter.delete('/:id/messages/:messageId', async (request, response) => {

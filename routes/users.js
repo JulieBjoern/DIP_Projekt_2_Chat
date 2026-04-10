@@ -85,7 +85,7 @@ userRouter.get('/:id/messages', (req, res) => {
 
 // liste af users router
 // Rækkefølge: Sti -> Middleware -> Handler
-userRouter.get('/', requiredLevel(2), (request, response) => {
+userRouter.get('/', requiredLevel(3), (request, response) => {
     response.render('userList', { users: UserController.getAllUsers() });
 });
 

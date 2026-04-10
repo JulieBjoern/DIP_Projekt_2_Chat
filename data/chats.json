@@ -93,5 +93,34 @@
     "ownerId": 0,
     "createdAt": "2026-04-09T09:03:15.707Z",
     "messages": []
+  },
+  {
+    "id": 8,
+    "name": "Test 123",
+    "ownerId": 0,
+    "createdAt": "2026-04-10T07:57:55.027Z",
+    "messages": []
+  },
+  {
+    "id": 9,
+    "name": "chat",
+    "ownerId": 0,
+    "createdAt": "2026-04-10T08:20:21.220Z",
+    "messages": [
+      {
+        "id": 5,
+        "text": "test",
+        "ownerId": 0,
+        "chatId": 9,
+        "createdAt": "2026-04-10T08:20:28.169Z"
+      },
+      {
+        "id": 7,
+        "text": "test 2",
+        "ownerId": 0,
+        "chatId": 9,
+        "createdAt": "2026-04-10T08:21:32.176Z"
+      }
+    ]
   }
 ]
