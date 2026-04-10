@@ -32,9 +32,20 @@ userRouter.post('/logout', (request, response) => {
     });
 })
 
-userRouter.post('/login', (request, response)=>{
-    const {username, password} = request.body
-        response.render('frontpage')
+userRouter.post('/login', async (request, response) => {
+    const { username, password } = request.body;
+    const user = await UserController.getUser(username, password);
+
+    if (user) {
+        request.session.userName = user.username;
+        request.session.userLevel = parseInt(user.level);
+        
+        request.session.save(() => {
+            response.redirect('/');
+        });
+    } else {
+        response.render('login', { error: 'Ugyldigt login' });
+    }
 })
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
