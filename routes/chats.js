@@ -49,7 +49,9 @@ chatRouter.get('/chat/:id/messages', (request, response) => {
     const messages = ChatController.getMessagesByChatId(id) || []
     response.render('specificChat', {
         chat, messages,
-        userLevel: request.session.userLevel
+        userLevel: request.session.userLevel,
+        user: { id: request.session.userId },
+        ownerId: chat.ownerId
     });
 })
 
