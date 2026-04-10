@@ -71,6 +71,8 @@ chatRouter.delete('/:id/messages/:messageId',requiredLevel(2), async (request, r
     if (!deletedMessage) {
         return response.status(404).json({ message: 'Besked ikke fundet' })
     }
+
+    response.json({ message: 'Besked slettet' })
 })
 
 // Slet en chat
