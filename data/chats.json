@@ -1,134 +1,30 @@
 [
   {
-    "id": 1,
-    "name": "Gruppechat Projekt",
-    "ownerId": 1,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "messages": [
-      {
-        "id": 1,
-        "text": "Hej allesammen!",
-        "ownerId": 1,
-        "chatId": 1,
-        "createdAt": "2026-01-01T00:00:00.000Z"
-      },
-      {
-        "id": 2,
-        "text": "Test besked",
-        "ownerId": 0,
-        "chatId": 1,
-        "createdAt": "2026-04-08T10:06:02.516Z"
-      },
-      {
-        "id": 4,
-        "text": "Tror snart vi er done!",
-        "ownerId": 0,
-        "chatId": 1,
-        "createdAt": "2026-04-09T10:20:17.325Z"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Gruppechat Aktivitet",
-    "ownerId": 1,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "messages": [
-      {
-        "id": 1,
-        "text": "Hej igen!",
-        "ownerId": 1,
-        "chatId": 2,
-        "createdAt": "2026-01-01T00:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Gruppechat Turnering",
-    "ownerId": 1,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "messages": [
-      {
-        "id": 1,
-        "text": "Hej endnu en gang!",
-        "ownerId": 1,
-        "chatId": 3,
-        "createdAt": "2026-01-01T00:00:00.000Z"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "OpretChatTest",
-    "ownerId": 0,
-    "createdAt": "2026-04-08T09:14:47.661Z",
+    "id": 13,
+    "name": "level3chatRedigeret",
+    "ownerId": 3,
+    "createdAt": "2026-04-10T09:20:47.393Z",
     "messages": []
   },
   {
-    "id": 5,
-    "name": "le",
-    "ownerId": 0,
-    "createdAt": "2026-04-09T07:09:25.373Z",
-    "messages": [
-      {
-        "id": 3,
-        "text": "hej",
-        "ownerId": 0,
-        "chatId": 5,
-        "createdAt": "2026-04-09T07:09:32.146Z"
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "name": "test00",
-    "ownerId": 0,
-    "createdAt": "2026-04-09T07:49:54.471Z",
+    "id": 14,
+    "name": "level2chat",
+    "ownerId": 2,
+    "createdAt": "2026-04-10T09:21:17.956Z",
     "messages": []
   },
   {
-    "id": 7,
-    "name": "ddd",
-    "ownerId": 0,
-    "createdAt": "2026-04-09T09:03:15.707Z",
+    "id": 15,
+    "name": "level1chat",
+    "ownerId": 1,
+    "createdAt": "2026-04-10T09:21:31.406Z",
     "messages": []
   },
   {
-    "id": 8,
-    "name": "Test 123",
-    "ownerId": 0,
-    "createdAt": "2026-04-10T07:57:55.027Z",
-    "messages": [
-      {
-        "id": 8,
-        "text": "test2",
-        "ownerId": 0,
-        "chatId": 8,
-        "createdAt": "2026-04-10T08:43:41.593Z"
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "name": "chat",
-    "ownerId": 0,
-    "createdAt": "2026-04-10T08:20:21.220Z",
-    "messages": [
-      {
-        "id": 5,
-        "text": "test",
-        "ownerId": 0,
-        "chatId": 9,
-        "createdAt": "2026-04-10T08:20:28.169Z"
-      },
-      {
-        "id": 7,
-        "text": "test 2",
-        "ownerId": 0,
-        "chatId": 9,
-        "createdAt": "2026-04-10T08:21:32.176Z"
-      }
-    ]
+    "id": 16,
+    "name": "level2brugerchatnr2",
+    "ownerId": 16,
+    "createdAt": "2026-04-10T09:24:58.338Z",
+    "messages": []
   }
 ]

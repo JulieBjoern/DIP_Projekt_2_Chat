@@ -57,4 +57,57 @@ chatRouter.delete('/:id/messages/:messageId', async (request, response) => {
     response.json({ message: 'Besked slettet' })
 })
 
+// Slet en chat
+chatRouter.delete('/:id', async (request, response) => {
+    const chatId = Number(request.params.id)
+    const userLevel = request.session.userLevel || 0
+    const userId = request.session.userId || 0
+
+    const chat = ChatController.getChatById(chatId)
+
+    if (!chat) {
+        return response.status(404).json({ message: 'Chat ikke fundet' })
+    }
+
+    // Niveau 2: kan kun slette egne chats
+    // Niveau 3: kan slette alle chats
+    if (userLevel === 2 && chat.ownerId !== userId) {
+        return response.status(403).json({ message: 'Du har ikke adgang til at slette denne chat' })
+    }
+
+    if (userLevel < 2) {
+        return response.status(403).json({ message: 'Du har ikke adgang til at slette chats' })
+    }
+
+    await ChatController.deleteChat(chatId)
+    response.json({ message: 'Chat slettet' })
+})
+
+// Rediger en chat
+chatRouter.put('/:id', async (request, response) => {
+    const chatId = Number(request.params.id)
+    const { name } = request.body
+    const userLevel = request.session.userLevel || 0
+    const userId = request.session.userId || 0
+
+    const chat = ChatController.getChatById(chatId)
+
+    if (!chat) {
+        return response.status(404).json({ message: 'Chat ikke fundet' })
+    }
+
+    // Niveau 2: kan kun redigere egne chats
+    // Niveau 3: kan redigere alle chats
+    if (userLevel === 2 && chat.ownerId !== userId) {
+        return response.status(403).json({ message: 'Du har ikke adgang til at redigere denne chat' })
+    }
+
+    if (userLevel < 2) {
+        return response.status(403).json({ message: 'Du har ikke adgang til at redigere chats' })
+    }
+
+    await ChatController.updateChat(chatId, name.trim(), chat.ownerId)
+    response.json({ message: 'Chat opdateret' })
+})
+
 export default chatRouter

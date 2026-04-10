@@ -5,10 +5,12 @@ class UserController {
     static users = [new User('ole', '123', 0)]
 
     static async addUser(username, password, level){
-        UserController.users.push(new User(username, password, level))
+        const newUser = new User(username, password, level)
+        UserController.users.push(newUser)
         if(level <= 3 && level> 0){
         await Archive.writeFile('data/users.json', JSON.stringify(UserController.users))
         }
+        return newUser
     }
 
     static async startUp(){

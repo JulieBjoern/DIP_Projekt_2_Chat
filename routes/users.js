@@ -37,6 +37,7 @@ userRouter.post('/login', async (request, response) => {
     const user = await UserController.getUser(username, password);
 
     if (user) {
+        request.session.userId = user.id;
         request.session.userName = user.username;
         request.session.userLevel = parseInt(user.level);
         
@@ -53,9 +54,10 @@ response.render('createUser')
 
 userRouter.post('/adduser', async (request, response)=>{
         const {username, password, level} = request.body
-        await UserController.addUser(username, password, level)
+        const newUser = await UserController.addUser(username, password, level)
         const userLevel = parseInt(level);
         if (userLevel >= 1 && userLevel <= 3) {
+    request.session.userId = newUser.id;
     request.session.userName = username;
         request.session.userLevel = userLevel;
 

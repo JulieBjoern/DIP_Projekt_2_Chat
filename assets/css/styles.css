@@ -134,6 +134,28 @@ button.delete-message:hover {
     background-color: #7f2f40;
 }
 
+button.delete-btn {
+    background-color: #9b3d4f;
+    font-size: 0.85em;
+    padding: 7px 11px;
+    margin: 0;
+}
+
+button.delete-btn:hover {
+    background-color: #7f2f40;
+}
+
+button.edit-btn {
+    background-color: #8a5a44;
+    font-size: 0.85em;
+    padding: 7px 11px;
+    margin: 0 4px 0 0;
+}
+
+button.edit-btn:hover {
+    background-color: #724935;
+}
+
 /* Chat siden */
 
 main { /* main er det primære indhold på siden, og det er her chatten vil være */
