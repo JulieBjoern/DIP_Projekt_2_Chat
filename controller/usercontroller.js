@@ -6,7 +6,9 @@ class UserController {
 
     static async addUser(username, password, level){
         UserController.users.push(new User(username, password, level))
+        if(level <= 3 && level> 0){
         await Archive.writeFile('data/users.json', JSON.stringify(UserController.users))
+        }
     }
 
     static async startUp(){
