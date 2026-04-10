@@ -33,8 +33,19 @@ userRouter.post('/logout', (request, response) => {
 })
 
 userRouter.post('/login', (request, response)=>{
-    const {username, password} = request.body
-        response.render('frontpage')
+    const { username, password } = request.body
+    const user = UserController.getUser(username, password)
+
+    if (!user) {
+        return response.status(401).render('noAcess', { title: 'Ingen adgang' })
+    }
+
+    request.session.userName = user.username
+    request.session.userLevel = parseInt(user.level) || 1
+
+    request.session.save(() => {
+        response.redirect('/')
+    })
 })
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
