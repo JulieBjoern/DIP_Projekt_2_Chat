@@ -71,6 +71,10 @@ a {
     text-decoration: none;
 }
 
+span.disabled-link {
+    color: #9b8896;
+}
+
 /* Chatliste + userliste */
 table {
     width: 100%;
@@ -103,6 +107,12 @@ button {
     color: white;
     font-size: 0.95em;
     cursor: pointer;
+}
+
+button:disabled {
+    background-color: #c9b8bf;
+    color: #f4eef1;
+    cursor: not-allowed;
 }
 
 

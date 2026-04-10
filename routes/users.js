@@ -10,6 +10,12 @@ userRouter.get('/login', (request, response)=>{
     response.render('login', {})
 })
 
+userRouter.post('/logout', (request, response) => {
+    request.session.destroy(() => {
+        response.redirect('/');
+    });
+})
+
 userRouter.post('/login', (request, response)=>{
     const {username, password} = request.body
         response.render('frontpage')

@@ -10,20 +10,37 @@ block content
                 each chat in chats
                     tr 
                         td
-                            a(href=`/chats/chat/${chat.id}/messages`, class='chat-link')= chat.name
+                            if isLoggedIn
+                                a(href=`/chats/chat/${chat.id}/messages`, class='chat-link')= chat.name
+                            else
+                                span.chat-link.disabled-link= chat.name
             else
                 tr
                     td Der er ikke oprettet nogle chats
 
-        a(href="/chats/addchat")
-            button(type="button") Opret chat💬
+        if isLoggedIn
+            a(href="/chats/addchat")
+                button(type="button") Opret chat💬
+        else
+            button(type="button" disabled) Opret chat💬
 
-        a(href="/users/adduser")
-            button(type="button") Opret bruger🤠
+        if isLoggedIn
+            a(href="/users/adduser")
+                button(type="button") Opret bruger🤠
+        else
+            button(type="button" disabled) Opret bruger🤠
 
-        a(href="/users")
-            button(type="button") Se liste over brugere🤠🤠
+        if isLoggedIn
+            a(href="/users")
+                button(type="button") Se liste over brugere🤠🤠
+        else
+            button(type="button" disabled) Se liste over brugere🤠🤠
 
-        button.logout(type="button") Log ud👺
+        if isLoggedIn
+            form(action="/users/logout" method="post")
+                button.logout(type="submit") Log ud
+        else
+            a(href="/users/login")
+                button.logout(type="button") Log ind
 
 

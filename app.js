@@ -73,7 +73,8 @@ app.post('/login', async (request, response) => {
 app.get('/', (request, response)=>{
         response.render('frontpage', {
             chats: ChatController.getAllChats(),
-            userName: request.session.userName || 'du er ikke logget ind'
+            userName: request.session.userName || 'du er ikke logget ind',
+            isLoggedIn: Boolean(request.session.userName)
         }) // her sender vi også alle chats med til vores frontpage, så vi kan vise dem der
     }
 )
