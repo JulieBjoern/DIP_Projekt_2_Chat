@@ -1,6 +1,6 @@
 import express from 'express'
 import ChatController from '../controller/chatcontroller.js'
-import userRouter, { requiredLevel } from './userRouter.js';
+import userRouter, { requiredLevel } from './users.js';
 
 const chatRouter = express.Router()
 
