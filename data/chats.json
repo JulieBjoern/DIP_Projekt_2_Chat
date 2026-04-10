@@ -70,5 +70,20 @@
     "ownerId": 16,
     "createdAt": "2026-04-10T09:24:58.338Z",
     "messages": []
+  },
+  {
+    "id": 17,
+    "name": "test level 3 chat",
+    "ownerId": 3,
+    "createdAt": "2026-04-10T11:40:22.792Z",
+    "messages": [
+      {
+        "id": 7,
+        "text": "du kan ikke slette denne som level2",
+        "ownerId": 3,
+        "chatId": 17,
+        "createdAt": "2026-04-10T11:40:35.616Z"
+      }
+    ]
   }
 ]
