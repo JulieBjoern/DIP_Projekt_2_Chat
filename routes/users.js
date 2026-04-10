@@ -44,7 +44,7 @@ userRouter.post('/login', async (request, response) => {
             response.redirect('/');
         });
     } else {
-        response.render('login', { error: 'Ugyldigt login' });
+        response.render('wrongUsernameOrPassword');
     }
 })
 userRouter.get('/adduser',(request,response)=>{
