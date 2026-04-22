@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    main
+        header
+            h1= chat.name
+            a(href="/") Tilbage til forsiden
+
+        div#message-list
+            if messages && messages.length > 0
+                each message in messages
+                    article.message(data-message-id=message.id)
+                        p= message.text
+                        p Oprettet #{message.createdAt}
+                        if userLevel === 2 && ownerId === user.id
+                        
+                            button.delete-message(type="button", data-message-id=message.id) Slet
+                        
+                        else if userLevel === 3
+                            button.delete-message(type="button", data-message-id=message.id) Slet
+                        else if userLevel > 1
+                        
+            else
+                p Der er ingen beskeder endnu.
+
+        form#message-form(data-chat-id=chat.id)
+            input#message-input(type="text", placeholder="Skriv en besked🤔...", required) 
+            button(type="submit") Send
+            redirect 

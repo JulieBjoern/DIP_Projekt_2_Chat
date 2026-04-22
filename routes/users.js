@@ -1,19 +1,101 @@
-import express, { request, response } from 'express'
+import express, { request } from 'express'
 import UserController from '../controller/usercontroller.js'
+import ChatController from '../controller/chatcontroller.js'
+
 
 const userRouter = express.Router()
 
 
+export const requiredLevel = (minLevel) => {
+    return (request, response, next) => {
+
+        if (request.session.userLevel >= minLevel) {
+            return next();
+        }
+        if (!request.session.userLevel) {
+            return response.render('login')
+        }
+        response.render('noAcess')
+    };
+};
+
+
+
+// ROUTES for login 
+userRouter.get('/login', (request, response)=>{
+    response.render('login', {})
+})
+
+userRouter.post('/logout', (request, response) => {
+    request.session.destroy(() => {
+        response.redirect('/');
+    });
+})
+
+userRouter.post('/login', async (request, response) => {
+    const { username, password } = request.body;
+    const user = await UserController.getUser(username, password);
+
+    if (user) {
+        request.session.userId = user.id;
+        request.session.userName = user.username;
+        request.session.userLevel = parseInt(user.level);
+        
+        request.session.save(() => {
+            response.redirect('/');
+        });
+    } else {
+        response.render('wrongUsernameOrPassword');
+    }
+})
 userRouter.get('/adduser',(request,response)=>{
 response.render('createUser')
 });
 
 userRouter.post('/adduser', async (request, response)=>{
-        const {username, password} = request.body
-        UserController.addUser(username, password)
-        response.redirect('/')
+        const {username, password, level} = request.body
+        const newUser = await UserController.addUser(username, password, level)
+        const userLevel = parseInt(level);
+        if (userLevel >= 1 && userLevel <= 3) {
+    request.session.userId = newUser.id;
+    request.session.userName = username;
+        request.session.userLevel = userLevel;
 
-        
+      request.session.save(() => {
+        response.redirect('/');
+    })
+    }
+})
+
+userRouter.get('/:id/messages', requiredLevel(3), (req, res) => {
+    const userId = Number(req.params.id);
+    const user = UserController.getUserById(userId);
+    const messages = ChatController.getMessagesBySenderId(userId);
+
+    // Hent alle chats som disse beskeder tilhører
+    const chats = messages.map(msg => {
+        return ChatController.getChatById(msg.chatId);
+    });
+
+    res.render('userMessages', {
+        user,
+        messages,
+        chats
+    });
+});
+
+
+// liste af users router
+// Rækkefølge: Sti -> Middleware -> Handler
+userRouter.get('/', requiredLevel(3), (request, response) => {
+    response.render('userList', { users: UserController.getAllUsers() });
+});
+
+// specifik user router
+userRouter.get('/:id', requiredLevel(3),(request,response)=>{
+    const userId = Number(request.params.id)
+    const user = UserController.getUserById(userId)
+    response.render('specificUser',{user, title: 'Specifik User'})
 })
 
 export default userRouter

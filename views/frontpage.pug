@@ -1,21 +1,44 @@
-html 
-    head
-        title forside
+extends layout
 
-        link(rel="stylesheet", href="/css/styles.css")
-    body
-        p Du er nu logget ind
-        p her burde du kunne: 
-            a logge ud
+block content
+    div 
+        p.loggedInAs Du er logget ind som: #{userName}
+        p Her er en liste over chats:   
+
         table 
-            p Her er en liste over chats: 
-            
-            button 
-                strong opret 
-                    | chat
-            button  
+            if chats && chats.length
+                each chat in chats
+                    tr 
+                        td
+                            if isLoggedIn
+                                a(href=`/chats/chat/${chat.id}/messages`, class='chat-link')= chat.name
+                            else
+                                span.chat-link.disabled-link= chat.name
+                        td
+                            if isLoggedIn && userLevel >= 2 && (userLevel === 3 || chat.ownerId === userId)
+                                button.edit-btn.edit-chat-btn(type="button", data-chat-id=chat.id, data-chat-name=chat.name) Rediger ✏️
+                                button.delete-btn.delete-chat-btn(type="button", data-chat-id=chat.id) Slet 🗑️
+            else
+                tr
+                    td Der er ikke oprettet nogle chats
+
+        if isLoggedIn && userLevel > 1
+            a(href="/chats/addchat")
+                button(type="button") Opret chat💬
+        else
+            button(type="button" disabled) Opret chat💬
+
+        if isLoggedIn
+            a(href="/users")
+                button(type="button") Se liste over brugere🤠🤠
+        else
+            button(type="button" disabled) Se liste over brugere🤠🤠
+
+        if isLoggedIn
+            form(action="/users/logout" method="post")
+                button.logout(type="submit") Log ud
+        else
+            a(href="/users/login")
+                button.login(type="button") Log ind
             a(href="/users/adduser")
-                strong opret 
-                    | bruger
-
-
+                button(type="button") Opret bruger🤠

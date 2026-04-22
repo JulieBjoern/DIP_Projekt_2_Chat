@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    main
+        header
+            h1 Login
+            a(href="/") Gå tilbage
+
+        div
+            h2 Her kan du logge ind🗝️
+            form(action="/users/login", method="post")
+                input(type="text", name="username", placeholder="Brugernavn")
+                input(type="password", name="password", placeholder="Kodeord")
+                button(type="submit") Login

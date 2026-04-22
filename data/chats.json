@@ -1,0 +1,89 @@
+[
+  {
+    "id": 13,
+    "name": "level3chatRedigeret",
+    "ownerId": 3,
+    "createdAt": "2026-04-10T09:20:47.393Z",
+    "messages": []
+  },
+  {
+    "id": 14,
+    "name": "level2chat",
+    "ownerId": 2,
+    "createdAt": "2026-04-10T09:21:17.956Z",
+    "messages": [
+      {
+        "id": 5,
+        "text": "hej",
+        "ownerId": 1,
+        "chatId": 14,
+        "createdAt": "2026-04-10T10:32:05.904Z"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "level1chat",
+    "ownerId": 1,
+    "createdAt": "2026-04-10T09:21:31.406Z",
+    "messages": [
+      {
+        "id": 1,
+        "text": "Hallo",
+        "ownerId": 1,
+        "chatId": 15,
+        "createdAt": "2026-04-10T09:56:16.990Z"
+      },
+      {
+        "id": 2,
+        "text": "Hej med dig",
+        "ownerId": 1,
+        "chatId": 15,
+        "createdAt": "2026-04-10T10:13:27.584Z"
+      },
+      {
+        "id": 3,
+        "text": "Få den slet knap væk",
+        "ownerId": 1,
+        "chatId": 15,
+        "createdAt": "2026-04-10T10:17:20.016Z"
+      },
+      {
+        "id": 4,
+        "text": "Hejhej",
+        "ownerId": 1,
+        "chatId": 15,
+        "createdAt": "2026-04-10T10:18:02.934Z"
+      },
+      {
+        "id": 6,
+        "text": "godav",
+        "ownerId": 1,
+        "chatId": 15,
+        "createdAt": "2026-04-10T10:35:47.147Z"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "level2brugerchatnr2",
+    "ownerId": 16,
+    "createdAt": "2026-04-10T09:24:58.338Z",
+    "messages": []
+  },
+  {
+    "id": 17,
+    "name": "test level 3 chat",
+    "ownerId": 3,
+    "createdAt": "2026-04-10T11:40:22.792Z",
+    "messages": [
+      {
+        "id": 7,
+        "text": "du kan ikke slette denne som level2",
+        "ownerId": 3,
+        "chatId": 17,
+        "createdAt": "2026-04-10T11:40:35.616Z"
+      }
+    ]
+  }
+]

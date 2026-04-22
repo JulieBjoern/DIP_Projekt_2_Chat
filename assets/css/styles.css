@@ -1,0 +1,223 @@
+/* vælg alle elementer på siden*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f2f8;
+    color: #b11478;
+}
+
+header {
+    background-color: #5a3e57;
+    color: #f6eee9;
+    padding: 16px 20px;
+}
+
+header h2 {
+    margin: 0;
+}
+
+footer {
+    margin-top: 30px;
+    color: #6d5966;
+    text-align: center;
+    padding: 14px;
+}
+
+/*Forsiden*/
+
+div {
+    position: relative; /* relative betyder at det er i forhold til det elementet selv, og ikke i forhold til det overordnede element*/
+    width: 90%;
+    max-width: 760px;
+    margin: 24px auto; /* auto centrerer elementet horisontalt */
+    padding: 24px;
+    border-radius: 16px;
+    background-color: #f5f0ed;
+}
+
+div.userBox {
+    width: 100%;
+    margin: 14px 0 0;
+    padding: 16px;
+    border: 1px solid #c8aebb;
+    border-radius: 12px;
+    background-color: #efe3ea;
+}
+
+div.userBox p {
+    margin: 5px 0;
+}
+
+
+p {
+    font-size: 1em;
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+p.loggedInAs {
+    position: static;
+    font-size: 0.9em;
+    color: #6d5966;
+}
+
+a {
+    color: #5a3e57;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+span.disabled-link {
+    color: #9b8896;
+}
+
+/* Chatliste + userliste */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #cbb8ae;
+    background-color: #fbf5f1;
+    margin: 12px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e4d6ce;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* knapper*/
+
+button {
+    display: inline-block;
+    margin: 8px 8px 0 0;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #a17a67;
+    color: white;
+    font-size: 0.95em;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #c9b8bf;
+    color: #f4eef1;
+    cursor: not-allowed;
+}
+
+
+button.logout {
+    background-color: #9c394b;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+button.login {
+    background-color: #399c40;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+
+button.delete-message {
+    background-color: #9b3d4f;
+    font-size: 0.85em;
+    padding: 7px 11px;
+}
+
+button.delete-message:hover {
+    background-color: #7f2f40;
+}
+
+button.delete-btn {
+    background-color: #9b3d4f;
+    font-size: 0.85em;
+    padding: 7px 11px;
+    margin: 0;
+}
+
+button.delete-btn:hover {
+    background-color: #7f2f40;
+}
+
+button.edit-btn {
+    background-color: #8a5a44;
+    font-size: 0.85em;
+    padding: 7px 11px;
+    margin: 0 4px 0 0;
+}
+
+button.edit-btn:hover {
+    background-color: #724935;
+}
+
+/* Chat siden */
+
+main { /* main er det primære indhold på siden, og det er her chatten vil være */
+    width: 90%;
+    max-width: 900px;
+    margin: 24px auto;
+}
+
+main > header { /* main > header betyder at det kun vil gælde header elementet som er direkte barn af main elementet */
+    background-color: #f6eee9;
+    color: #3a2f36;
+    border: 1px solid #cbb8ae;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+}
+
+#message-list {
+    border: 1px solid #cbb8ae;
+    border-radius: 14px;
+    background-color: #fbf5f1;
+    padding: 14px;
+    min-height: 240px;
+}
+
+article.message {
+    border: 1px solid #c8aebb;
+    background-color: #efe3ea;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+#message-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+#message-input {
+    flex: 1;
+    padding: 11px;
+    border: 1px solid #cbb8ae;
+    border-radius: 10px;
+    font-size: 1em;
+    background-color: #fbf4ef;
+    color: #3a2f36;
+}
+
+#message-input:focus {
+    border-color: #8a5a44;
+}
+
+
+

@@ -10,3 +10,5 @@ class Chat {
         this.messages = []; 
     }
 }
+
+export default Chat;

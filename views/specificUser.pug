@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    main
+        header
+            h1 Specifik user
+            a(href="/") Gå tilbage
+
+        div
+            p Her er den specifikke user:
+
+            if user
+                div.userBox
+                    p Navn: #{user.username}
+                    p Level: #{user.level}
+                    p Oprettelsesdato: #{user.createdAt}
+                    a(href=`/users/${user.id}/messages`, class='user-link', data-id=user.id)
+                        | Se sendte beskeder
+            else
+                p Brugeren blev ikke fundet
